@@ -71,7 +71,7 @@
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                 <img src="img/dendeng-balado.jpg" class="block w-full object-contain" alt="Menu 2">
                 <div class="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 p-4 text-white">
-                    <h3 class="text-xl font-semibold">Sate Padang</h3>
+                    <h3 class="text-xl font-semibold">Dendeng Balado</h3>
                     <p class="text-lg">Sate khas Padang dengan bumbu kacang pedas manis yang lezat.</p>
                 </div>
             </div>
@@ -79,7 +79,7 @@
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
                 <img src="img/es-tebak.jpg" class="block w-full object-contain" alt="Menu 3">
                 <div class="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 p-4 text-white">
-                    <h3 class="text-xl font-semibold">Gulai Ikan</h3>
+                    <h3 class="text-xl font-semibold">Es-tebak</h3>
                     <p class="text-lg">Ikan segar dimasak dalam kuah gulai rempah yang kental dan kaya rasa.</p>
                 </div>
             </div>
