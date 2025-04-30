@@ -10,7 +10,7 @@ class ContactController extends Controller
     // Menampilkan halaman kontak
     public function index()
     {
-        return view('contact');
+        return view('pages.contact');
     }
 
     // Memproses form kontak
