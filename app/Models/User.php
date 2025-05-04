@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',   // <-- pastikan ada
     ];
 
     /**
@@ -45,4 +46,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
 }
