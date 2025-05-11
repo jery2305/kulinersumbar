@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Order; // Pastikan model Order sudah ada
 
 class OrderController extends Controller
 {
@@ -68,16 +69,24 @@ class OrderController extends Controller
         // Lakukan pemrosesan pemesanan seperti menyimpan ke database, dll.
         // Untuk sekarang, anggap pemesanan berhasil.
 
-        session()->forget('cart'); // Mengosongkan keranjang setelah checkout
+        $order = new Order();
+        $order->user_id = auth()->id(); // Ambil ID user yang sedang login
+        $order->total = $request->total; // Anda bisa menyimpan total harga di sini
+        $order->status = 'Menunggu Pembayaran'; // Misalnya status awal
+        $order->save(); // Simpan data pesanan
+
+        // Mengosongkan keranjang setelah checkout
+        session()->forget('cart');
 
         return redirect()->route('cart')->with('message', 'Pesanan Anda berhasil diproses!');
     }
 
-    public function history()
+    // Menampilkan histori pesanan
+    public function history() 
     {
-       // Misalnya jika ingin menggunakan data yang tersimpan dalam sesi atau cara lain
         $user = auth()->user();
-        $orders = $user->orders;  // Jika relasi 'orders' ada pada model User
+        // Menggunakan paginate untuk mengambil riwayat pesanan
+        $orders = $user->orders()->paginate(10);  // Misalnya 10 pesanan per halaman
         return view('pages.history', compact('orders'));
     }
 }

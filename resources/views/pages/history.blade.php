@@ -21,10 +21,10 @@
                         <div class="flex justify-between items-center">
                             <h2 class="text-lg font-semibold">Resi: {{ $order->resi }}</h2>
                             <span class="px-3 py-1 rounded-full text-sm
-                                {{ $order->status=='Menunggu Pembayaran' ? 'bg-yellow-200 text-yellow-800' : '' }}
-                                {{ $order->status=='Sedang Diproses' ? 'bg-blue-200 text-blue-800' : '' }}
-                                {{ $order->status=='Dikirim' ? 'bg-indigo-200 text-indigo-800' : '' }}
-                                {{ $order->status=='Selesai' ? 'bg-green-200 text-green-800' : '' }}
+                                {{ $order->status == 'Menunggu Pembayaran' ? 'bg-yellow-200 text-yellow-800' : '' }}
+                                {{ $order->status == 'Sedang Diproses' ? 'bg-blue-200 text-blue-800' : '' }}
+                                {{ $order->status == 'Dikirim' ? 'bg-indigo-200 text-indigo-800' : '' }}
+                                {{ $order->status == 'Selesai' ? 'bg-green-200 text-green-800' : '' }}
                             ">{{ $order->status }}</span>
                         </div>
                         <p class="text-sm text-gray-500 mb-4">{{ $order->created_at->format('d M Y H:i') }}</p>
@@ -41,6 +41,11 @@
                         <p class="text-right font-semibold">Total: Rp {{ number_format($total,0,',','.') }}</p>
                     </div>
                 @endforeach
+            </div>
+
+            <!-- Pagination -->
+            <div class="mt-6 text-center">
+                {{ $orders->links() }}  <!-- Paginasi akan muncul jika $orders dipaginasi -->
             </div>
         @endif
     </div>

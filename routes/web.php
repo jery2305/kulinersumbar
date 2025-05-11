@@ -17,7 +17,9 @@ Route::get('/', function () {
 });
 
 //Admin
-Route::middleware(['auth', 'is_admin'])->get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::middleware(['auth', 'is_admin'])->group(function () {
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+});
 
 //Register
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -53,6 +55,7 @@ Route::post('/contact', [ContactController::class, 'send'])->name('contact.send'
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 
 // Checkout
 Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
