@@ -37,12 +37,15 @@ class CheckoutController extends Controller
 
         // Tampilkan halaman sukses dan kirim data ke tampilan
         return view('pages.checkout-success', [
-            'nama'       => $data['nama'],
-            'alamat'     => $data['alamat'],
-            'telepon'    => $data['telepon'],
-            'pembayaran' => $data['pembayaran'],
-            'resi'       => $resi,
-            'total'      => $total, // Kirim total pembayaran ke view
+            'order' => [
+                'nama'       => $data['nama'],
+                'alamat'     => $data['alamat'],
+                'telepon'    => $data['telepon'],
+                'pembayaran' => $data['pembayaran'],
+                'cart'       => $cart,
+                'total'      => $total,
+            ],
+            'resi' => $resi,
         ]);
     }
 }

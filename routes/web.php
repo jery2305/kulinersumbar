@@ -7,6 +7,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -59,7 +60,7 @@ Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.u
 
 // Checkout
 Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
-Route::post('/checkout', [CartController::class, 'processCheckout'])->name('process-checkout');
+Route::post('/checkout', [CheckoutController::class, 'processCheckout'])->name('process-checkout');
 Route::get('/checkout/success', [CartController::class, 'success'])->name('checkout.success');
 
 //Oder
