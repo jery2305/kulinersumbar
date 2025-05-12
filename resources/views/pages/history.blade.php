@@ -17,28 +17,29 @@
         @else
             <div class="space-y-6">
                 @foreach($orders as $order)
-                    <div class="bg-white p-6 rounded-lg shadow">
-                        <div class="flex justify-between items-center">
-                            <h2 class="text-lg font-semibold">Resi: {{ $order->resi }}</h2>
-                            <span class="px-3 py-1 rounded-full text-sm
-                                {{ $order->status == 'Menunggu Pembayaran' ? 'bg-yellow-200 text-yellow-800' : '' }}
-                                {{ $order->status == 'Sedang Diproses' ? 'bg-blue-200 text-blue-800' : '' }}
-                                {{ $order->status == 'Dikirim' ? 'bg-indigo-200 text-indigo-800' : '' }}
-                                {{ $order->status == 'Selesai' ? 'bg-green-200 text-green-800' : '' }}
-                            ">{{ $order->status }}</span>
+    <div class="bg-white rounded-lg shadow p-6 mb-6">
+        <div class="flex justify-between items-start">
+            <div>
+                <p class="text-lg font-semibold">Resi: {{ $order->resi }}</p>
+                <p class="text-sm text-gray-500">{{ $order->created_at->format('d M Y H:i') }}</p>
+            </div>
+            <p class="text-sm text-gray-600">{{ strtolower($order->status) }}</p>
+        </div>
+
+        <div class="mt-4">
+            <p class="font-medium">Detail Pesanan:</p>
+            <ul class="list-disc list-inside text-sm mt-1">
+                @php $total = 0; @endphp
+                                @foreach($order->items as $item)
+                                    @php 
+                                        $sub = $item->price * $item->quantity; 
+                                        $total += $sub; 
+                                    @endphp
+                                    <li>{{ $item->quantity }} x {{ $item->menu }} (Rp {{ number_format($sub, 0, ',', '.') }})</li>
+                                @endforeach
+                            </ul>
+                            <p class="text-right font-semibold mt-3">Total: Rp {{ number_format($total, 0, ',', '.') }}</p>
                         </div>
-                        <p class="text-sm text-gray-500 mb-4">{{ $order->created_at->format('d M Y H:i') }}</p>
-
-                        <h3 class="font-medium">Detail Pesanan:</h3>
-                        <ul class="list-disc list-inside mb-4">
-                            @php $total = 0; @endphp
-                            @foreach($order->items as $item)
-                                @php $sub = $item->price * $item->quantity; $total += $sub; @endphp
-                                <li>{{ $item->quantity }} x {{ $item->menu }} (Rp {{ number_format($sub,0,',','.') }})</li>
-                            @endforeach
-                        </ul>
-
-                        <p class="text-right font-semibold">Total: Rp {{ number_format($total,0,',','.') }}</p>
                     </div>
                 @endforeach
             </div>

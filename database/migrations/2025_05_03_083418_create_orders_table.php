@@ -7,15 +7,16 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+       Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('menu_id')->constrained('menus')->onDelete('cascade');  // Menambahkan menu_id
             $table->string('nama');
             $table->string('alamat');
             $table->string('telepon');
             $table->string('pembayaran');
             $table->string('resi')->unique();
-            $table->string('status')->default('Menunggu Pembayaran');
+            $table->enum('status', ['Menunggu Pembayaran', 'Dikirim', 'Selesai'])->default('Menunggu Pembayaran');  // Opsional enum untuk status
             $table->timestamps();
         });
         

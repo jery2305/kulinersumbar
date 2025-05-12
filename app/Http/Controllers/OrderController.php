@@ -85,8 +85,18 @@ class OrderController extends Controller
     public function history() 
     {
         $user = auth()->user();
-        // Menggunakan paginate untuk mengambil riwayat pesanan
-        $orders = $user->orders()->paginate(10);  // Misalnya 10 pesanan per halaman
+        // Mengambil pesanan dan relasi items, paginasi 10
+        $orders = $user->orders()->with('items')->paginate(10);
+
+        // Hitung total untuk setiap order
+        foreach ($orders as $order) {
+            $order->total_price = $order->items->sum(function ($item) {
+                return $item->price * $item->quantity;  // Menghitung harga total item
+            });
+        }
+
+        // Kirim data orders ke tampilan
         return view('pages.history', compact('orders'));
     }
+
 }

@@ -36,7 +36,7 @@
             </div>
             <!-- Slide 2 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="img/dendeng-balado.jpg" class="block w-full object-contain" alt="Menu 2">
+                <img src="img/dendeng_balado.jpg" class="block w-full object-contain" alt="Menu 2">
                 <div class="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 p-4 text-white">
                     <h3 class="text-xl font-semibold">Dendeng Balado</h3>
                     <p class="text-lg">Irisan tipis daging sapi yang digoreng kering, disajikan dengan sambal balado pedas khas Padang.</p>
@@ -44,7 +44,7 @@
             </div>
             <!-- Slide 3 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="img/es-tebak.jpg" class="block w-full object-contain" alt="Menu 3">
+                <img src="img/es_tebak.jpg" class="block w-full object-contain" alt="Menu 3">
                 <div class="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 p-4 text-white">
                     <h3 class="text-xl font-semibold">Es-tebak</h3>
                     <p class="text-lg">Minuman segar khas Sumatera Barat berisi campuran es serut, tebak (cendol), sirup, santan, dan topping manis lainnya.</p>

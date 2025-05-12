@@ -47,6 +47,7 @@ Route::get('/about', [AboutController::class, 'index']);
 //Menu
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 Route::post('/pesan', [MenuController::class, 'pesan'])->name('pesan');
+Route::post('/menu/{menuId}/review', [MenuController::class, 'addReview'])->name('menu.addReview');
 
 //Contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');

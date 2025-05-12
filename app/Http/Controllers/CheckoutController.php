@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\Order;
+use App\Models\OrderItem;
 
 class CheckoutController extends Controller
 {
     public function processCheckout(Request $request)
     {
+        // Validasi input
         $data = $request->validate([
             'nama'       => 'required|string',
             'alamat'     => 'required|string',
@@ -16,26 +19,48 @@ class CheckoutController extends Controller
             'pembayaran' => 'required|string',
         ]);
 
-        // Ambil keranjang belanja dari session
+        // Ambil data keranjang dari session
         $cart = session()->get('cart', []);
 
         if (empty($cart)) {
             return redirect()->back()->with('error', 'Keranjang kosong.');
         }
 
-       // Hitung total harga pesanan
+        // Hitung total
         $total = 0;
         foreach ($cart as $item) {
-            $total += $item['price'] * $item['quantity']; // Total per item
+            $total += $item['price'] * $item['quantity'];
         }
-        
-        // Generate resi (misalnya pakai UUID atau random string)
+
+        // Generate resi
         $resi = strtoupper(Str::random(10));
 
-        // Kosongkan keranjang setelah checkout
+        // Simpan order ke database
+        $order = new Order();
+        $order->user_id = auth()->id();
+        $order->nama = $data['nama'];
+        $order->alamat = $data['alamat'];
+        $order->telepon = $data['telepon'];
+        $order->pembayaran = $data['pembayaran'];
+        $order->resi = $resi;
+        $order->total = $total;
+        $order->status = 'Menunggu Pembayaran';
+        $order->save();
+
+        // Simpan item ke order_items
+        foreach ($cart as $item) {
+            OrderItem::create([
+                'order_id' => $order->id,
+                'menu'     => $item['name'],
+                'price'    => $item['price'],
+                'quantity' => $item['quantity'],
+            ]);
+        }
+
+        // Kosongkan keranjang
         session()->forget('cart');
 
-        // Tampilkan halaman sukses dan kirim data ke tampilan
+        // Tampilkan halaman sukses
         return view('pages.checkout-success', [
             'order' => [
                 'nama'       => $data['nama'],
