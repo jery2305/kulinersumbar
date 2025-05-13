@@ -14,13 +14,13 @@
 
     <header class="text-center py-12 bg-gradient-to-r from-red-500 to-yellow-500 text-white">
         <h2 class="text-4xl font-bold mb-4">Nikmati Kelezatan Kuliner Khas Minang!</h2>
-        <p class="mb-6">Dari Rendang sampai Sate Padang — Temukan semua di sini</p>
+        <p class="mb-6">Dari Rendang sampai Sate Minang — Temukan semua di siko</p>
         <a href="/menu" class="bg-white text-red-600 font-semibold py-2 px-4 rounded shadow hover:bg-gray-200">Lihat Menu</a>
     </header>
 
     <section id="menu" class="p-8">
         <div class="container mx-auto py-12">
-    <h2 class="text-center text-3xl font-bold mb-8">Menu Kuliner Sumatera Barat</h2>
+    <h2 class="text-center text-3xl font-bold mb-8">Menu Kulliner Sumatera Barat</h2>
   
     <!-- Flowbite Carousel -->
     <div id="menu-carousel" class="relative" data-carousel="slide">
