@@ -19,7 +19,7 @@
         <form action="{{ route('process-checkout') }}" method="POST" class="space-y-4">
             @csrf
             <div>
-                <label class="block text-sm font-medium text-gray-700">Nama Lengkapp</label>
+                <label class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
                 <input type="text" name="nama" required class="mt-1 block w-full border border-gray-300 rounded-lg p-2">
             </div>
             <div>
@@ -39,7 +39,7 @@
                 </select>
             </div>
             <div class="bg-gray-50 p-4 rounded-lg">
-                <h3 class="text-lg font-semibold mb-2 text-gray-800">Ringkasan Pesanann</h3>
+                <h3 class="text-lg font-semibold mb-2 text-gray-800">Ringkasan Pesanan</h3>
                 <ul class="space-y-2">
                     @foreach($cart as $item)
                     <li class="flex justify-between text-sm text-gray-700">
