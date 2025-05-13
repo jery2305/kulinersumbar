@@ -70,4 +70,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/orders/{id}/status', [OrderController::class, 'updateStatus'])->name('orders.update.status');
 });
 
+//team
+Route::view('/team', 'pages.team')->name('team');
+
+//FAQ
+Route::get('/faq', function () {
+    return view('pages.faq');
+})->name('faq');
+
+
 

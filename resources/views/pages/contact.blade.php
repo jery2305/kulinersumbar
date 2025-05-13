@@ -16,8 +16,7 @@
   <section class="max-w-4xl mx-auto p-8 mt-10 bg-white rounded-lg shadow-lg border">
     <h1 class="text-4xl font-extrabold text-gray-800 mb-4 text-center">Hubungi Kami</h1>
     <p class="text-gray-600 text-center mb-8">
-      Punya pertanyaan atau pesan? Kirimkan langsung melalui form berikut.
-    </p>
+      Punya pertanyaan atau pesan? Kirimkan langsung melalui form berikut.</p>
 
     @if(session('success'))
       <div class="bg-green-500 text-white p-4 mb-6 rounded text-center">

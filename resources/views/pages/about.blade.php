@@ -35,7 +35,7 @@
     <ul class="list-disc list-inside">
       <li>Menyajikan informasi kuliner Minang yang akurat dan menarik.</li>
       <li>Membantu pelaku usaha kuliner lokal untuk lebih dikenal secara online.</li>
-      <li>Mengedukasi masyarakat tentang kekayaan budaya kuliner Sumatera Barat.</li>
+      <li>Mengedukasi Masyarakat tentang kekayaan budaya kuliner Sumatera Barat.</li>
     </ul>
   </div>
 </section>
