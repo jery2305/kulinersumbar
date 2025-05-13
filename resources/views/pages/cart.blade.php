@@ -11,7 +11,7 @@
   <x-navbar />
 
   <div class="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10">
-        <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Keranjang Belanja</h1>
+        <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Keranjang Belanjaaa</h1>
 
         @if(is_array($cartItems) && count($cartItems) > 0)
         <div class="overflow-x-auto">
@@ -78,7 +78,7 @@
                 <a href="{{ route('checkout') }}" class="inline-block mt-4 bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">Checkout</a>
             </div>
         @else
-            <p class="text-center text-gray-600">Keranjang kamu kosong.</p>
+            <p class="text-center text-gray-600">Keranjang kamu kosonggg.</p>
             <div class="text-center mt-6">
                 <a href="/menu" class="inline-block bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">Kembali ke Menu</a>
             </div>

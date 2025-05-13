@@ -10,10 +10,10 @@
     <x-navbar />
 
     <div class="max-w-4xl mx-auto py-12 px-4">
-        <h1 class="text-3xl font-bold mb-6 text-center">Histori Pemesanan</h1>
+        <h1 class="text-3xl font-bold mb-6 text-center">Histori Pemesanannn</h1>
 
         @if($orders->isEmpty())
-            <p class="text-center text-gray-600">Anda belum melakukan pemesanan.</p>
+            <p class="text-center text-gray-600">Anda belum melakukan pemesanannnn.</p>
         @else
             <div class="space-y-6">
                 @foreach($orders as $order)
