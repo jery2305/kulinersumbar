@@ -1,55 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Login - Sumatera Barat</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Login - Sumatera Barat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Tailwind & Flowbite -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 min-h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1517511620798-cec17d428bc0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');">
+<body class="bg-gradient-to-br from-blue-100 via-white to-yellow-100 min-h-screen flex items-center justify-center">
 
-    <div class="bg-white bg-opacity-90 backdrop-blur-sm p-10 rounded-2xl shadow-2xl max-w-md w-full text-center">
-        
-        <!-- Logo Rumah Gadang -->
-        <img src="{{ asset('img/rumah-gadang.jpg') }}" alt="Logo Rumah Gadang" class="w-60 h-60 mx-auto mb-2">
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
+    <!-- Header -->
+    <div class="text-center mb-8">
+    <img src="{{ asset('img/rumah-gadang.jpg') }}" alt="Logo Sumbar" class="w-16 mx-auto mb-3">
 
-        <h2 class="text-3xl font-extrabold text-gray-800 mb-6">Selamat Datang</h2>
 
-        @if ($errors->any())
-            <div class="mb-4 text-red-600 text-sm text-center">
-                {{ $errors->first() }}
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <div class="mb-4 text-left">
-                <label for="email" class="block text-gray-700 font-medium mb-1">Email</label>
-                <input type="email" name="email" id="email" required autocomplete="email"
-                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-            </div>
-
-            <div class="mb-6 text-left">
-                <label for="password" class="block text-gray-700 font-medium mb-1">Password</label>
-                <input type="password" name="password" id="password" required autocomplete="current-password"
-                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-            </div>
-
-            <button type="submit"
-                    class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
-                Login
-            </button>
-        </form>
-
-        <div class="mt-6 text-center">
-            <p class="text-sm text-gray-600">Belum punya akun?</p>
-            <a href="{{ route('register') }}"
-               class="mt-2 inline-block text-white bg-green-500 py-2 px-5 rounded-lg hover:bg-green-600 transition font-semibold">
-                Daftar Sekarang
-            </a>
-        </div>
+      <h1 class="text-3xl font-extrabold text-gray-800">Login Pengguna</h1>
+      <p class="text-sm text-gray-500">Selamat datang kembali di portal Sumatera Barat</p>
     </div>
 
+    <!-- Form Login -->
+    <form method="POST" action="{{ route('login') }}" class="space-y-6">
+      @csrf <!-- Laravel CSRF token -->
+
+      <!-- Email -->
+      <div>
+        <label for="email" class="block mb-1 text-sm font-medium text-gray-700">Email</label>
+        <input type="email" name="email" id="email" required
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-3 transition duration-150 ease-in-out"
+          placeholder="nama@email.com" />
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label for="password" class="block mb-1 text-sm font-medium text-gray-700">Password</label>
+        <input type="password" name="password" id="password" required
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-3 transition duration-150 ease-in-out"
+          placeholder="••••••••" />
+      </div>
+
+      <!-- Remember & Lupa Password -->
+      <div class="flex items-center justify-between">
+        <label class="flex items-center text-sm text-gray-600">
+          <input type="checkbox" class="mr-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" name="remember">
+          Ingat saya
+        </label>
+        <a href="#" class="text-sm text-blue-600 hover:underline">Lupa password?</a>
+      </div>
+
+      <!-- Tombol Login -->
+      <button type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl py-3 transition duration-200">
+        Masuk
+      </button>
+
+      <!-- Register -->
+      <p class="text-center text-sm text-gray-600">
+        Belum punya akun?
+        <a href="{{ route('register') }}" class="text-blue-600 hover:underline font-medium">Daftar sekarang</a>
+      </p>
+    </form>
+  </div>
+
+  <!-- Script Flowbite -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 </body>
 </html>
