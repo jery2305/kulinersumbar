@@ -11,16 +11,15 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\RegisterController;
+
+//AdminController
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserAdminController;
+use App\Http\Controllers\Admin\MenuAdminController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-//Admin
-Route::middleware(['auth', 'is_admin'])->group(function () {
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+// });
 
 //Register
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -80,3 +79,29 @@ Route::get('/faq', function () {
 
 
 
+//AdminController
+
+//Admin
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+});
+
+//User
+Route::middleware(['auth'])->prefix('admin/user')->name('admin.user.')->group(function () {
+    Route::get('/', [UserAdminController::class, 'index'])->name('index');
+    Route::get('/create', [UserAdminController::class, 'create'])->name('create');
+    Route::post('/', [UserAdminController::class, 'store'])->name('store');
+    Route::get('/{user}/edit', [UserAdminController::class, 'edit'])->name('edit');
+    Route::put('/{user}', [UserAdminController::class, 'update'])->name('update');
+    Route::delete('/{user}', [UserAdminController::class, 'destroy'])->name('destroy');
+});
+
+//Menu
+Route::middleware(['auth'])->prefix('admin/menu')->name('admin.menu.')->group(function () {
+    Route::get('/', [MenuAdminController::class, 'index'])->name('index');
+    Route::get('/create', [MenuAdminController::class, 'create'])->name('create');
+    Route::post('/', [MenuAdminController::class, 'store'])->name('store');
+    Route::get('/{menu}/edit', [MenuAdminController::class, 'edit'])->name('edit');
+    Route::put('/{menu}', [MenuAdminController::class, 'update'])->name('update');
+    Route::delete('/{menu}', [MenuAdminController::class, 'destroy'])->name('destroy');
+});
