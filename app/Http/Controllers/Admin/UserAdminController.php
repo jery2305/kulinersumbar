@@ -63,8 +63,20 @@ class UserAdminController extends Controller
 
     public function destroy(User $user)
     {
-        $user->delete();
+        // Cegah agar user tidak bisa menghapus dirinya sendiri
+        if (auth()->id() === $user->id) {
+            return redirect()->route('admin.user.index')
+                ->with('error', 'Kamu tidak bisa menghapus akunmu sendiri.');
+        }
 
-        return redirect()->route('admin.user.index')->with('success', 'Pengguna berhasil dihapus.');
+        try {
+            $user->delete();
+            return redirect()->route('admin.user.index')
+                ->with('success', 'Pengguna berhasil dihapus.');
+        } catch (\Throwable $e) {
+            return redirect()->route('admin.user.index')
+                ->with('error', 'Gagal menghapus pengguna: ' . $e->getMessage());
+        }
     }
+
 }

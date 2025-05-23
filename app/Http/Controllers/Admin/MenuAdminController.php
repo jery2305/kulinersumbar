@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class MenuAdminController extends Controller
 {
@@ -15,9 +15,18 @@ class MenuAdminController extends Controller
         return view('admin.menu.index', compact('menus'));
     }
 
+    public function edit(Menu $menu)
+    {
+        // Kalau kamu perlu daftar gambar juga, bisa ambil disini
+        $imageFiles = $this->getAvailableImages(); 
+
+        return view('admin.menu.create-edit', compact('menu', 'imageFiles'));
+    }
+
     public function create()
     {
-        return view('admin.menu.create');
+        $imageFiles = $this->getAvailableImages();
+        return view('admin.menu.create-edit', compact('imageFiles'));
     }
 
     public function store(Request $request)
@@ -31,22 +40,19 @@ class MenuAdminController extends Controller
 
         $filename = null;
         if ($request->hasFile('image')) {
-            $filename = $request->file('image')->store('menu', 'public');
+            $image = $request->file('image');
+            $filename = $image->getClientOriginalName();  // nama asli file
+            $image->move(public_path('img'), $filename); // simpan di public/img
         }
 
         Menu::create([
             'name' => $request->name,
             'price' => $request->price,
             'description' => $request->description,
-            'image' => $filename ? basename($filename) : null,
+            'image' => $filename,
         ]);
 
         return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil ditambahkan.');
-    }
-
-    public function edit(Menu $menu)
-    {
-        return view('admin.menu.edit', compact('menu'));
     }
 
     public function update(Request $request, Menu $menu)
@@ -58,25 +64,39 @@ class MenuAdminController extends Controller
             'image' => 'nullable|image|mimes:jpg,jpeg,png',
         ]);
 
+        $data = $request->only('name', 'price', 'description');
+
         if ($request->hasFile('image')) {
-            if ($menu->image) {
-                Storage::disk('public')->delete('menu/'.$menu->image);
+            // Hapus file lama jika ada
+            if ($menu->image && file_exists(public_path('img/' . $menu->image))) {
+                unlink(public_path('img/' . $menu->image));
             }
-            $menu->image = basename($request->file('image')->store('menu', 'public'));
+
+            $image = $request->file('image');
+            $filename = $image->getClientOriginalName(); // nama asli file
+            $image->move(public_path('img'), $filename);
+
+            $data['image'] = $filename;
         }
 
-        $menu->update($request->only('name', 'price', 'description', 'image'));
+        $menu->update($data);
 
         return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil diperbarui.');
     }
 
     public function destroy(Menu $menu)
     {
-        if ($menu->image) {
-            Storage::disk('public')->delete('menu/'.$menu->image);
-        }
-
         $menu->delete();
         return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil dihapus.');
+    }
+
+    public function getAvailableImages()
+    {
+        $files = scandir(public_path('img'));
+        $images = array_filter($files, function ($file) {
+            return preg_match('/\.(jpg|jpeg|png)$/i', $file);
+        });
+
+        return $images;
     }
 }

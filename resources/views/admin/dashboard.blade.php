@@ -1,71 +1,42 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <h1 class="mb-4 fw-bold">Dashboard Admin</h1>
+<div class="container py-4">
+    <h2 class="mb-5 text-uppercase fw-bold ps-3">Dashboard Admin</h2>
 
     <div class="row g-4">
-        <!-- Total Pengguna -->
-        <div class="col-md-4">
-            <div class="card text-white bg-primary shadow">
-                <div class="card-body">
-                    <h5 class="card-title">Total Pengguna</h5>
-                    <p class="display-6">{{ $userCount }}</p>
-                    <a href="{{ route('admin.user.index') }}" class="btn btn-outline-light btn-sm">Lihat Pengguna</a>
-                </div>
-            </div>
-        </div>
+        <!-- Card Template -->
+        @php
+            $cards = [
+                ['color' => 'linear-gradient(135deg, #007bff, #6610f2)', 'title' => 'Daftar Pengguna', 'count' => $userCount, 'icon' => 'bi-people-fill', 'route' => route('admin.user.index')],
+                ['color' => 'linear-gradient(135deg, #28a745, #218838)', 'title' => 'Daftar Menu', 'count' => $menuCount, 'icon' => 'bi-list-ul', 'route' => route('admin.menu.index')],
+                ['color' => 'linear-gradient(135deg, #ffc107, #fd7e14)', 'title' => 'Daftar Order', 'count' => $orderCount, 'icon' => 'bi-bag-check-fill', 'route' => route('admin.order.index')],
+                ['color' => 'linear-gradient(135deg, #17a2b8, #20c997)', 'title' => 'Daftar Rating', 'count' => $ratingCount, 'icon' => 'bi-star-fill', 'route' => '#'],
+                ['color' => 'linear-gradient(135deg, #343a40, #495057)', 'title' => 'Daftar Order Item', 'count' => $orderItemCount, 'icon' => 'bi-box-seam', 'route' => route('admin.orderitem.index')]
+            ];
+        @endphp
 
-        <!-- Total Menu -->
-        <div class="col-md-4">
-            <div class="card text-white bg-success shadow">
-                <div class="card-body">
-                    <h5 class="card-title">Total Menu</h5>
-                    <p class="display-6">{{ $menuCount }}</p>
-                    <a href="{{ route('admin.menu.index') }}" class="btn btn-outline-light btn-sm">Lihat Menu</a>
+        @foreach($cards as $card)
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow border-0 text-white h-100" style="background: {{ $card['color'] }}; border-radius: 1rem;">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="card-title mb-1">{{ $card['title'] }}</h5>
+                        <p class="display-6 fw-bold mb-3">{{ $card['count'] }}</p>
+                        <a href="{{ $card['route'] }}" class="btn btn-outline-light btn-sm rounded-pill">Lihat</a>
+                    </div>
+                    <i class="bi {{ $card['icon'] }} fs-1 opacity-50"></i>
                 </div>
             </div>
         </div>
-
-        <!-- Total Order -->
-        <div class="col-md-4">
-            <div class="card text-white bg-warning shadow">
-                <div class="card-body">
-                    <h5 class="card-title">Total Pesanan</h5>
-                    <p class="display-6">{{ $orderCount }}</p>
-                    <a href="#" class="btn btn-outline-light btn-sm">Lihat Pesanan</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Total Rating -->
-        <div class="col-md-6">
-            <div class="card text-white bg-info shadow">
-                <div class="card-body">
-                    <h5 class="card-title">Total Rating</h5>
-                    <p class="display-6">{{ $ratingCount }}</p>
-                    <a href="#" class="btn btn-outline-light btn-sm">Lihat Rating</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Total Order Item -->
-        <div class="col-md-6">
-            <div class="card text-white bg-dark shadow">
-                <div class="card-body">
-                    <h5 class="card-title">Total Item Dipesan</h5>
-                    <p class="display-6">{{ $orderItemCount }}</p>
-                    <a href="#" class="btn btn-outline-light btn-sm">Lihat Item</a>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 
     <hr class="my-5">
 
-    <div class="alert alert-secondary shadow">
-        <h5 class="alert-heading">Informasi Admin</h5>
-        <p>Gunakan panel ini untuk melihat statistik singkat sistem. Arahkan ke halaman detail untuk kelola data lebih lanjut.</p>
+    <div class="alert alert-light border shadow-sm text-center">
+        <h5 class="alert-heading text-dark"><i class="bi bi-info-circle-fill me-2"></i>Informasi Panel Admin</h5>
+        <p class="mb-0 text-secondary">Pantau aktivitas sistem dan kelola data melalui panel ini. Klik tombol "Lihat" untuk membuka data secara rinci.</p>
     </div>
 </div>
 @endsection

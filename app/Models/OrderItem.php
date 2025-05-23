@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class OrderItem extends Model
 {
     protected $fillable = [
-        'order_id', 'menu', 'quantity', 'price'
+        'order_id', 'menu_id', 'menu_name', 'quantity', 'price'
     ];
 
     public function order()
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function menu()
+    {
+        return $this->belongsTo(Menu::class);
     }
 }

@@ -16,6 +16,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\Admin\MenuAdminController;
+use App\Http\Controllers\Admin\OrderAdminController;
+use App\Http\Controllers\Admin\OrderItemAdminController;
 
 //Route::get('/', function () {
 //    return view('welcome');
@@ -104,4 +106,23 @@ Route::middleware(['auth'])->prefix('admin/menu')->name('admin.menu.')->group(fu
     Route::get('/{menu}/edit', [MenuAdminController::class, 'edit'])->name('edit');
     Route::put('/{menu}', [MenuAdminController::class, 'update'])->name('update');
     Route::delete('/{menu}', [MenuAdminController::class, 'destroy'])->name('destroy');
+});
+
+//Order
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('order', [OrderAdminController::class, 'index'])->name('order.index');
+    Route::get('order/form/{id?}', [OrderAdminController::class, 'form'])->name('order.form');
+    Route::post('order/store', [OrderAdminController::class, 'store'])->name('order.store');
+    Route::put('order/update/{id}', [OrderAdminController::class, 'update'])->name('order.update');
+    Route::delete('order/delete/{id}', [OrderAdminController::class, 'destroy'])->name('order.destroy');
+     Route::post('order/confirm/{id}', [OrderAdminController::class, 'confirm'])->name('order.confirm');
+});
+
+//OrderItem
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('orderitem', [OrderItemAdminController::class, 'index'])->name('orderitem.index');
+    Route::get('orderitem/form/{id?}', [OrderItemAdminController::class, 'form'])->name('orderitem.form');
+    Route::post('orderitem', [OrderItemAdminController::class, 'store'])->name('orderitem.store');
+    Route::put('orderitem/{id}', [OrderItemAdminController::class, 'update'])->name('orderitem.update');
+    Route::delete('orderitem/{id}', [OrderItemAdminController::class, 'destroy'])->name('orderitem.destroy');
 });

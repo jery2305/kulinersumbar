@@ -2,7 +2,12 @@
 
 @section('content')
 <div class="container">
-    <h1 class="mb-4 fw-bold">Daftar Pengguna</h1>
+     <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="fw-bold">Daftar Pengguna</h1>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left-circle"></i> Dashboard
+        </a>
+    </div>
 
     <a href="{{ route('admin.user.create') }}" class="btn btn-primary mb-3">+ Tambah Pengguna</a>
 

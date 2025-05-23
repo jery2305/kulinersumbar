@@ -51,7 +51,8 @@ class CheckoutController extends Controller
         foreach ($cart as $item) {
             OrderItem::create([
                 'order_id' => $order->id,
-                'menu'     => $item['name'],
+                'menu_id'   => $item['id'],      // ini penting
+                'menu_name' => $item['name'],
                 'price'    => $item['price'],
                 'quantity' => $item['quantity'],
             ]);

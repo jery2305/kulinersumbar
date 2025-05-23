@@ -2,7 +2,12 @@
 
 @section('content')
 <div class="container">
-    <h1 class="mb-4 fw-bold">Daftar Menu</h1>
+     <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="fw-bold">Daftar Menu</h1>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left-circle"></i> Dashboard
+        </a>
+    </div>
 
     <a href="{{ route('admin.menu.create') }}" class="btn btn-primary mb-3">+ Tambah Menu</a>
 
@@ -10,7 +15,7 @@
         <table class="table table-bordered table-hover align-middle">
             <thead class="table-light">
                 <tr>
-                    <th>#</th>
+                    <th>No</th>
                     <th>Gambar</th>
                     <th>Nama Menu</th>
                     <th>Harga</th>

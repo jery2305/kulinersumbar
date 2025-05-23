@@ -9,9 +9,6 @@
 </head>
 <body class="bg-gray-50">
 
-<!-- Navbar -->
-<x-navbar />
-
 <!<!-- About Section -->
 <section class="max-w-4xl mx-auto p-8 rounded-lg shadow-lg mt-3">
   <!-- Gambar Kuliner -->
@@ -26,20 +23,12 @@
     Website ini dikembangkan oleh mahasiswa Informatika sebagai media promosi dan edukasi budaya kuliner Indonesia, khususnya dari Sumatera Barat.
     Kami berharap melalui platform ini, budaya kuliner Minang semakin dikenal dan dicintai di berbagai penjuru Nusantara.
   </p>
-
-  <div class="mt-6 text-black">
-    <h2 class="text-2xl font-semibold mb-2">Visi</h2>
-    <p class="mb-4">Menjadi platform digital terbaik dalam mengenalkan kuliner Minangkabau ke seluruh Indonesia.</p>
-
-    <h2 class="text-2xl font-semibold mb-2">Misi</h2>
-    <ul class="list-disc list-inside">
-      <li>Menyajikan informasi kuliner Minang yang akurat dan menarik.</li>
-      <li>Membantu pelaku usaha kuliner lokal untuk lebih dikenal secara online.</li>
-      <li>Mengedukasi Masyarakat tentang kekayaan budaya kuliner Sumatera Barat.</li>
-    </ul>
-  </div>
 </section>
 
+<!-- Tombol Kembali ke Home -->
+ <x-back-home />
+
+<!-- Footer -->
 <x-footer />
 
 </body>

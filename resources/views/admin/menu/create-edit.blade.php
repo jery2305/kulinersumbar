@@ -27,9 +27,10 @@
             <label class="form-label">Gambar</label>
             <input type="file" name="image" class="form-control">
             @if(isset($menu) && $menu->image)
-                <img src="{{ asset('storage/menu/'.$menu->image) }}" width="150" class="mt-2">
+                <img src="{{ asset('img/'.$menu->image) }}" width="150" class="mt-2" alt="{{ $menu->name }}">
             @endif
         </div>
+
 
         <button type="submit" class="btn btn-success">{{ isset($menu) ? 'Update' : 'Simpan' }}</button>
     </form>

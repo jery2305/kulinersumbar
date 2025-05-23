@@ -23,7 +23,21 @@
                 <p class="text-lg font-semibold">Resi: {{ $order->resi }}</p>
                 <p class="text-sm text-gray-500">{{ $order->created_at->format('d M Y H:i') }}</p>
             </div>
-            <p class="text-sm text-gray-600">{{ strtolower($order->status) }}</p>
+
+            @php
+                $statusBadge = match($order->status) {
+                    'Menunggu Pembayaran' => ['color' => 'bg-yellow-100 text-yellow-800', 'icon' => null],
+                    'Diproses' => ['color' => 'bg-blue-100 text-blue-800', 'icon' => null],
+                    'Dikirim' => ['color' => 'bg-purple-100 text-purple-800', 'icon' => null],
+                    'Selesai' => ['color' => 'bg-green-100 text-green-800', 'icon' => '✅'],
+                    default => ['color' => 'bg-gray-100 text-gray-800', 'icon' => null],
+                };
+            @endphp
+
+            <span class="text-sm px-3 py-1 rounded-full font-medium {{ $statusBadge['color'] }}">
+                @if ($statusBadge['icon']) {{ $statusBadge['icon'] }} @endif {{ $order->status }}
+            </span>
+
         </div>
 
         <div class="mt-4">
@@ -35,7 +49,7 @@
                                         $sub = $item->price * $item->quantity; 
                                         $total += $sub; 
                                     @endphp
-                                    <li>{{ $item->quantity }} x {{ $item->menu }} (Rp {{ number_format($sub, 0, ',', '.') }})</li>
+                                    <li>{{ $item->quantity }} x {{ $item->menu->name }} (Rp {{ number_format($sub, 0, ',', '.') }})</li>
                                 @endforeach
                             </ul>
                             <p class="text-right font-semibold mt-3">Total: Rp {{ number_format($total, 0, ',', '.') }}</p>

@@ -84,10 +84,11 @@ class OrderController extends Controller
     // Menampilkan histori pesanan
     public function history() 
     {
-        $user = auth()->user();
-        // Mengambil pesanan dan relasi items, paginasi 10
-        $orders = $user->orders()->with('items')->paginate(10);
-
+        $orders = Order::where('user_id', auth()->id())
+        ->with('items.menu')
+        ->orderBy('created_at', 'desc') // <-- pastikan ada ini
+        ->paginate(10);
+        
         // Hitung total untuk setiap order
         foreach ($orders as $order) {
             $order->total_price = $order->items->sum(function ($item) {
