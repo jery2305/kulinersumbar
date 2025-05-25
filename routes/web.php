@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\Admin\MenuAdminController;
 use App\Http\Controllers\Admin\OrderAdminController;
 use App\Http\Controllers\Admin\OrderItemAdminController;
+use App\Http\Controllers\Admin\ContactAdminController;
 
 //Route::get('/', function () {
 //    return view('welcome');
@@ -52,7 +53,7 @@ Route::post('/menu/{menuId}/review', [MenuController::class, 'addReview'])->name
 
 //Contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-Route::post('/contact', [ContactController::class, 'send'])->name('contact.send'); // Pengiriman Form Kontak
+Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
 
 // Cart
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
@@ -125,4 +126,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('orderitem', [OrderItemAdminController::class, 'store'])->name('orderitem.store');
     Route::put('orderitem/{id}', [OrderItemAdminController::class, 'update'])->name('orderitem.update');
     Route::delete('orderitem/{id}', [OrderItemAdminController::class, 'destroy'])->name('orderitem.destroy');
+});
+
+//Contact
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('contact', [ContactAdminController::class, 'index'])->name('contact.index');
+    Route::get('contact/create', [ContactAdminController::class, 'create'])->name('contact.create');
+    Route::post('contact', [ContactAdminController::class, 'store'])->name('contact.store');
+    Route::get('contact/{contact}/edit', [ContactAdminController::class, 'edit'])->name('contact.edit');
+    Route::put('contact/{contact}', [ContactAdminController::class, 'update'])->name('contact.update');
+    Route::delete('contact/{contact}', [ContactAdminController::class, 'destroy'])->name('contact.destroy');
 });

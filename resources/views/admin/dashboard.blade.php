@@ -8,11 +8,48 @@
         <!-- Card Template -->
         @php
             $cards = [
-                ['color' => 'linear-gradient(135deg, #007bff, #6610f2)', 'title' => 'Daftar Pengguna', 'count' => $userCount, 'icon' => 'bi-people-fill', 'route' => route('admin.user.index')],
-                ['color' => 'linear-gradient(135deg, #28a745, #218838)', 'title' => 'Daftar Menu', 'count' => $menuCount, 'icon' => 'bi-list-ul', 'route' => route('admin.menu.index')],
-                ['color' => 'linear-gradient(135deg, #ffc107, #fd7e14)', 'title' => 'Daftar Order', 'count' => $orderCount, 'icon' => 'bi-bag-check-fill', 'route' => route('admin.order.index')],
-                ['color' => 'linear-gradient(135deg, #17a2b8, #20c997)', 'title' => 'Daftar Rating', 'count' => $ratingCount, 'icon' => 'bi-star-fill', 'route' => '#'],
-                ['color' => 'linear-gradient(135deg, #343a40, #495057)', 'title' => 'Daftar Order Item', 'count' => $orderItemCount, 'icon' => 'bi-box-seam', 'route' => route('admin.orderitem.index')]
+                [
+                    'color' => 'linear-gradient(135deg, #4facfe, #00f2fe)',
+                    'title' => 'Daftar Pengguna',
+                    'count' => $userCount,
+                    'icon' => 'bi-people-fill',
+                    'route' => route('admin.user.index')
+                ],
+                [
+                    'color' => 'linear-gradient(135deg, #43e97b, #38f9d7)',
+                    'title' => 'Daftar Menu',
+                    'count' => $menuCount,
+                    'icon' => 'bi-list-ul',
+                    'route' => route('admin.menu.index')
+                ],
+                [
+                    'color' => 'linear-gradient(135deg, #f093fb, #f5576c)',
+                    'title' => 'Daftar Order Item',
+                    'count' => $orderItemCount,
+                    'icon' => 'bi-box-seam',
+                    'route' => route('admin.orderitem.index')
+                ],
+                [
+                    'color' => 'linear-gradient(135deg, #ffc107, #fd7e14)',
+                    'title' => 'Daftar Order',
+                    'count' => $orderCount,
+                    'icon' => 'bi-bag-check-fill',
+                    'route' => route('admin.order.index')
+                ],
+                [
+                    'color' => 'linear-gradient(135deg, #17a2b8, #20c997)',
+                    'title' => 'Daftar Rating',
+                    'count' => $ratingCount,
+                    'icon' => 'bi-star-fill',
+                    'route' => '#'
+                ],
+                [
+                    'color' => 'linear-gradient(135deg, #6f42c1, #e83e8c)',
+                    'title' => 'Daftar Kontak',
+                    'count' => $contactCount,
+                    'icon' => 'bi-envelope-fill',
+                    'route' => route('admin.contact.index')
+                ],
             ];
         @endphp
 

@@ -8,6 +8,7 @@ use App\Models\Rating;
 use App\Models\OrderItem;
 use App\Models\Order;
 use App\Models\Menu;
+use App\Models\Contact;
 
 class DashboardController extends Controller
 {
@@ -19,13 +20,15 @@ class DashboardController extends Controller
         $orderCount = Order::count();
         $ratingCount = Rating::count();
         $orderItemCount = OrderItem::count();
+        $contactCount = Contact::count();
 
         return view('admin.dashboard', compact(
             'userCount',
             'menuCount',
             'orderCount',
             'ratingCount',
-            'orderItemCount'
+            'orderItemCount',
+            'contactCount'
         ));
     }
 

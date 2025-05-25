@@ -3,34 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use App\Models\Contact;
 
 class ContactController extends Controller
 {
     // Menampilkan halaman kontak
     public function index()
     {
-        return view('pages.contact');
+        return view('pages.contact');  // Sesuaikan dengan lokasi view kamu
     }
 
-    // Memproses form kontak
+    // Menangani pengiriman form kontak
     public function send(Request $request)
     {
-        // Validasi input dari pengguna
-        $validated = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email',
-            'message' => 'required',
+        // Validasi input
+        $request->validate([
+            'nama'  => 'required|string|max:100',
+            'email' => 'required|email|max:255',
+            'pesan' => 'required|string|max:1000',
         ]);
 
-        // Kirim email ke admin
-        Mail::raw($request->message, function ($message) use ($request) {
-            $message->to('support@kulinersumbar.com')
-                    ->subject('Pesan dari ' . $request->name)
-                    ->from($request->email);
-        });
+        // Simpan data kontak ke database
+        Contact::create([
+            'nama'  => $request->nama,
+            'email' => $request->email,
+            'pesan' => $request->pesan,
+        ]);
 
-        // Mengirimkan pesan sukses dan mengarahkan kembali ke halaman kontak
-        return redirect()->route('contact.index')->with('success', 'Pesan Anda telah dikirim!');
+        // Redirect balik dengan pesan sukses
+        return back()->with('success', 'Pesan Anda berhasil dikirim. Terima kasih!');
     }
 }

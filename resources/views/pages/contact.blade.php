@@ -28,8 +28,8 @@
       @csrf
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label for="name" class="block mb-2 font-medium text-gray-800">Nama Lengkap</label>
-          <input type="text" id="name" name="name" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" required>
+          <label for="nama" class="block mb-2 font-medium text-gray-800">Nama Lengkap</label>
+          <input type="text" id="nama" name="nama" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" required>
         </div>
         <div>
           <label for="email" class="block mb-2 font-medium text-gray-800">Email</label>
@@ -38,8 +38,8 @@
       </div>
 
       <div>
-        <label for="message" class="block mb-2 font-medium text-gray-800">Pesan Anda</label>
-        <textarea id="message" name="message" rows="5" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" required></textarea>
+        <label for="pesan" class="block mb-2 font-medium text-gray-800">Pesan Anda</label>
+        <textarea id="pesan" name="pesan" rows="5" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" required></textarea>
       </div>
 
       <div class="text-center">
