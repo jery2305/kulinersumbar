@@ -1,4 +1,4 @@
-@props(['menu'])
+@props(['menu', 'canReview' => false])
 
 <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
     <img src="{{ asset('img/'.$menu->image) }}" alt="{{ $menu->name }}" class="w-full h-56 object-cover rounded-t-lg">
@@ -17,8 +17,16 @@
         </form>
 
         <!-- Ulasan dan Rating -->
-        <x-review-form 
-        :menu="$menu" 
-        :success="session('success_menu_id') === $menu->id ? session('success') : null"/>
+        @if($canReview)
+            <x-review-form 
+                :menu="$menu" 
+                :success="session('success_menu_id') === $menu->id ? session('success') : null"/>
+        @else
+            <div class="mt-4 border-t pt-4 text-sm text-gray-500 italic">
+                <span class="text-yellow-600 mr-2">🔒</span>
+                Anda harus memesan menu ini terlebih dahulu dan pesanan dikonfirmasi <strong>selesai</strong> sebelum bisa memberi ulasan.
+            </div>
+        @endif
+
     </div>
 </div>

@@ -1,3 +1,7 @@
+@php
+    $cartCount = session('cart') ? count(session('cart')) : 0;
+@endphp
+
 <!-- Navbar -->
 <nav class="bg-white border-gray-200 shadow">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -14,24 +18,15 @@
                 <li><a href="/" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700">Home</a></li>
                 <li><a href="/menu" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700">Menu</a></li>
                 <li><a href="/contact" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700">Contact</a></li>
-                <li>
-                    <a href="/cart" class="flex items-center py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700">
-                        <svg class="w-6 h-6 mr-1 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path d="M3 3h2l.4 2M7 13h14l-1.35 6.45a2 2 0 01-2 1.55H7a2 2 0 01-2-2v-11h16M16 16a2 2 0 110 4 2 2 0 010-4zM8 16a2 2 0 110 4 2 2 0 010-4z"/>
-                        </svg>
-                        shopping cart</a>
-                </li>
                 <li><a href="{{ route('orders.history') }}" class="block py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700">History</a></li>
 
                 @guest
-                    <!-- Jika belum login -->
                     <li>
                         <a href="{{ route('login') }}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700">
                             Login
                         </a>
                     </li>
                 @else
-                    <!-- Jika sudah login -->
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -41,6 +36,21 @@
                         </form>
                     </li>
                 @endguest
+
+                <!-- Cart item selalu tampil -->
+                <li class="flex items-center">
+                    <a href="/cart" class="relative inline-flex items-center justify-center h-full px-2 text-gray-700 hover:text-red-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M3 3h2l.4 2M7 13h14l-1.35 6.45a2 2 0 01-2 1.55H7a2 2 0 01-2-2v-11h16M16 16a2 2 0 110 4 2 2 0 010-4zM8 16a2 2 0 110 4 2 2 0 010-4z"/>
+                        </svg>
+                        @if($cartCount > 0)
+                            <span class="absolute top-0 right-0 -mt-1 -mr-1 bg-red-600 text-white text-xs px-1.5 py-0.5 rounded-full">
+                                {{ $cartCount }}
+                            </span>
+                        @endif
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>

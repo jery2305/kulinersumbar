@@ -11,9 +11,26 @@ class MenuController extends Controller
 {
    public function index()
     {
-        $menus = Menu::with('ratings')->get(); // Eager load rating
-        return view('pages.menu', compact('menus'));
+        $menus = Menu::with('ratings')->get(); // Tetap load ratings
+
+        $completedMenuIds = [];
+
+        if (auth()->check()) {
+            $completedMenuIds = Order::where('user_id', auth()->id())
+                ->where('status', 'selesai')
+                ->with('items') // relasi ke order_items
+                ->get()
+                ->flatMap(function ($order) {
+                    return $order->items;
+                })
+                ->pluck('menu_id')
+                ->unique()
+                ->toArray();
+        }
+
+        return view('pages.menu', compact('menus', 'completedMenuIds'));
     }
+
 
     public function pesan(Request $request)
     {
@@ -36,8 +53,13 @@ class MenuController extends Controller
     {
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
-            'review' => 'nullable|string|max:255',
+            'review' => 'required|string|min:4',
+        ], [
+            'rating.required' => 'Rating wajib diisi.',
+            'review.required' => 'Ulasan tidak boleh kosong.',
+            'review.min' => 'Ulasan minimal 4 karakter.',
         ]);
+
 
         // Cek apakah user sudah pernah memesan menu ini
         $hasOrdered = Order::where('user_id', auth()->id())

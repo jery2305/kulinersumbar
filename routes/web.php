@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\MenuAdminController;
 use App\Http\Controllers\Admin\OrderAdminController;
 use App\Http\Controllers\Admin\OrderItemAdminController;
 use App\Http\Controllers\Admin\ContactAdminController;
+use App\Http\Controllers\Admin\RatingAdminController;
 
 //Route::get('/', function () {
 //    return view('welcome');
@@ -56,10 +57,12 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact.index
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
 
 // Cart
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
-Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+});
 
 // Checkout
 Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
@@ -136,4 +139,14 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('contact/{contact}/edit', [ContactAdminController::class, 'edit'])->name('contact.edit');
     Route::put('contact/{contact}', [ContactAdminController::class, 'update'])->name('contact.update');
     Route::delete('contact/{contact}', [ContactAdminController::class, 'destroy'])->name('contact.destroy');
+});
+
+//Rating
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('rating', [RatingAdminController::class, 'index'])->name('rating.index');
+    Route::get('rating/create', [RatingAdminController::class, 'create'])->name('rating.create');
+    Route::post('rating', [RatingAdminController::class, 'store'])->name('rating.store');
+    Route::get('rating/{rating}/edit', [RatingAdminController::class, 'edit'])->name('rating.edit');
+    Route::put('rating/{rating}', [RatingAdminController::class, 'update'])->name('rating.update');
+    Route::delete('rating/{rating}', [RatingAdminController::class, 'destroy'])->name('rating.destroy');
 });

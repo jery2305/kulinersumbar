@@ -20,6 +20,12 @@
       <p class="text-sm text-gray-500">Selamat datang kembali di portal Sumatera Barat</p>
     </div>
 
+      @if ($errors->any())
+    <div class="mb-4 text-sm text-red-600 bg-red-100 px-4 py-2 rounded-xl border border-red-300">
+      {{ $errors->first() }}
+    </div>
+  @endif
+
     <!-- Form Login -->
     <form method="POST" action="{{ route('login') }}" class="space-y-6">
       @csrf <!-- Laravel CSRF token -->

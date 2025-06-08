@@ -15,6 +15,10 @@
                             ★
                         </label>
                     @endfor
+
+                    @error('rating')
+                    <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
 
             </div>
@@ -38,35 +42,64 @@
             </div>
         @endif
 
+     <!-- Toggle Ulasan -->
     <div class="mt-6">
-        <h4 class="text-lg font-semibold mb-4 text-gray-800">Ulasan Pelanggan:</h4>
-        @forelse($menu->ratings as $rating)
-            <div class="flex items-start space-x-4 bg-white p-4 rounded-lg shadow-sm border mb-4">
-                <!-- Avatar Placeholder -->
-                <div class="flex-shrink-0">
-                    <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-white font-bold">
-                        {{ strtoupper(substr($rating->user->name ?? 'U', 0, 1)) }}
-                    </div>
-                </div>
+        <div class="flex items-center justify-between mb-4">
+            <h4 class="text-lg font-semibold text-gray-800">Ulasan Pelanggan:</h4>
+            <button type="button" onclick="toggleReviews('{{ $menu->id }}')" class="text-gray-600 hover:text-blue-600 transition">
+                <!-- Ikon mata dari Heroicons -->
+                <svg id="toggle-icon-{{ $menu->id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 12s3.75-6.75 9.75-6.75S21.75 12 21.75 12s-3.75 6.75-9.75 6.75S2.25 12 2.25 12z" />
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+            </button>
 
-                <div class="flex-1">
-                    <!-- Rating bintang -->
-                    <div class="flex items-center space-x-2">
-                        <div class="text-yellow-500 text-lg">
-                            {{ str_repeat('★', $rating->rating) }}
-                            {{ str_repeat('☆', 5 - $rating->rating) }}
+        </div>
+
+        <div id="review-section-{{ $menu->id }}" class="space-y-4 hidden">
+            @forelse($menu->ratings as $rating)
+                <div class="flex items-start space-x-4 bg-white p-4 rounded-lg shadow-sm border">
+                    <!-- Avatar -->
+                    <div class="flex-shrink-0">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-white font-bold">
+                            {{ strtoupper(substr($rating->user->name ?? 'U', 0, 1)) }}
                         </div>
-                        <span class="text-sm text-gray-500">({{ $rating->created_at->format('d M Y') }})</span>
                     </div>
 
-                    <!-- Ulasan -->
-                    <p class="mt-2 text-gray-700 leading-relaxed">
-                        {{ $rating->review }}
-                    </p>
+                    <div class="flex-1">
+                        <!-- Bintang dan Tanggal -->
+                        <div class="flex items-center space-x-2">
+                            <div class="text-yellow-500 text-lg">
+                                {{ str_repeat('★', $rating->rating) }}
+                                {{ str_repeat('☆', 5 - $rating->rating) }}
+                            </div>
+                            <span class="text-sm text-gray-500">({{ $rating->created_at->format('d M Y') }})</span>
+                        </div>
+
+                        <!-- Isi Ulasan -->
+                        <p class="mt-2 text-gray-700 leading-relaxed">
+                            {{ $rating->review }}
+                        </p>
+                    </div>
                 </div>
-            </div>
-        @empty
-            <p class="text-gray-500 text-sm">Belum ada ulasan untuk menu ini.</p>
-        @endforelse
+            @empty
+                <p class="text-gray-500 text-sm">Belum ada ulasan untuk menu ini.</p>
+            @endforelse
+        </div>
     </div>
 </div>
+
+<!-- Script toggle -->
+<script>
+    function toggleReviews(menuId) {
+        const section = document.getElementById('review-section-' + menuId);
+        section.classList.toggle('hidden');
+
+        // Contoh untuk toggle ikon (jika ada variasi ikon)
+        const icon = document.getElementById('toggle-icon-' + menuId);
+        // Di sini bisa kamu ubah kelas SVG kalau punya 2 versi ikon mata
+    }
+</script>

@@ -7,16 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rating extends Model
 {
+    use HasFactory;
+
+    protected $fillable = ['rating', 'review', 'menu_id'];
+
+    /**
+     * Relasi ke menu yang diberi rating.
+     */
     public function menu()
     {
         return $this->belongsTo(Menu::class);
     }
-
-     use HasFactory;
-
-    // Menambahkan menu_id ke dalam fillable
-    protected $fillable = ['rating', 'review', 'menu_id'];
-
-    // atau jika anda menggunakan guarded, Anda bisa menambahkan
-    // protected $guarded = [];
 }

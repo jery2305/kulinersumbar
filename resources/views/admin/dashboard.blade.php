@@ -41,7 +41,7 @@
                     'title' => 'Daftar Rating',
                     'count' => $ratingCount,
                     'icon' => 'bi-star-fill',
-                    'route' => '#'
+                    'route' => route('admin.rating.index')
                 ],
                 [
                     'color' => 'linear-gradient(135deg, #6f42c1, #e83e8c)',

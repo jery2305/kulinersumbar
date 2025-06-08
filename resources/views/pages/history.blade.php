@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Histori Pemesanan - Kuliner Sumbar</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
 </head>
 <body class="bg-gray-50 font-sans">
 
