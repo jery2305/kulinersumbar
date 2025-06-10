@@ -17,7 +17,6 @@
         <i class="fas fa-check-circle text-green-600 text-4xl mb-4"></i>
         <h2 class="text-3xl font-bold mb-4 text-green-600 animate-pulse">Pesanan Berhasil!</h2>
         <p class="mb-2 text-gray-700">Terima kasih, {{ $order['nama'] }}. Pesanan Anda telah kami terima.</p>
-        <p class="mb-2 text-gray-700">Nomor Resi: <span class="font-mono">{{ $resi }}</span></p>
         <p class="mb-4 text-gray-700">Metode Pembayaran: {{ $order['pembayaran'] }}</p>
 
         <div class="bg-gray-50 p-4 rounded-lg mb-4">

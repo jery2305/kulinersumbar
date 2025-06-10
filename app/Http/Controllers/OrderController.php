@@ -100,4 +100,29 @@ class OrderController extends Controller
         return view('pages.history', compact('orders'));
     }
 
+   public function uploadBukti(Request $request, $id)
+    {
+        $request->validate([
+            'bukti' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $order = Order::findOrFail($id);
+
+        if ($request->hasFile('bukti')) {
+            $file = $request->file('bukti');
+
+            // Simpan dengan nama asli
+            $filename = $file->getClientOriginalName();
+
+            // Pindahkan ke folder public/img
+            $path = $file->move(public_path('img'), $filename);
+
+            // Simpan path relatif ke database
+            $order->bukti_pembayaran = 'img/' . $filename;
+            $order->save();
+        }
+
+        return redirect()->back()->with('success', 'Bukti pembayaran berhasil diunggah.');
+    }
+
 }

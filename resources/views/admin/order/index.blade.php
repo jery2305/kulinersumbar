@@ -30,6 +30,7 @@
                 <th>Status</th>
                 <th>Resi</th>
                 <th>Total</th>
+                <th>Bukti Pembayaran</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -45,6 +46,15 @@
                     <td class="text-center">{{ ucfirst($order->status) }}</td>
                     <td>{{ $order->resi ?? '-' }}</td>
                     <td class="text-end">Rp {{ number_format($order->total, 0, ',', '.') }}</td>
+                    
+                    <td class="text-center">
+                    @if($order->bukti_pembayaran)
+                        <img src="{{ asset($order->bukti_pembayaran) }}" alt="Bukti Pembayaran" style="max-width: 100px; border-radius: 6px;">
+                    @else
+                       <span class="text-muted fst-italic">Belum dikirim</span>
+                    @endif
+                    </td>
+
                     <td class="text-center">
                         <a href="{{ route('admin.order.form', $order->id) }}" class="btn btn-sm btn-primary me-1">Edit</a>
 

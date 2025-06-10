@@ -78,8 +78,28 @@ class MenuController extends Controller
         ]);
 
         return redirect()->back()
-            ->with('success_menu_id', $menuId)
-            ->with('success', 'Ulasan berhasil dikirim!');
+        ->with('success', 'Ulasan berhasil dikirim!')
+        ->with('menu_id', $menuId); // ini penting
     }
+
+    public function reviewPage($id)
+    {
+        $menu = Menu::with(['ratings.user'])->findOrFail($id);
+        
+        // Cek apakah user sudah pernah pesan dan pesanan selesai
+        $user = auth()->user();
+        $canReview = false;
+
+        if ($user) {
+            $canReview = \App\Models\OrderItem::where('menu_id', $menu->id)
+                ->whereHas('order', function ($q) use ($user) {
+                    $q->where('user_id', $user->id)
+                    ->where('status', 'Selesai');
+                })->exists();
+        }
+
+        return view('pages.review-page', compact('menu', 'canReview'));
+    }
+
 
 }

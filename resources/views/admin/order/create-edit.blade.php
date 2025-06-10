@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <form action="{{ isset($order) ? route('admin.order.update', $order->id) : route('admin.order.store') }}" method="POST">
+    <form action="{{ isset($order) ? route('admin.order.update', $order->id) : route('admin.order.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @if(isset($order))
             @method('PUT')
@@ -70,6 +70,16 @@
             <label for="total" class="form-label">Total Pembayaran (Rp)</label>
             <input type="number" name="total" id="total" class="form-control" value="{{ old('total', $order->total ?? '') }}" required min="0">
         </div>
+
+        <div class="mb-3">
+        <label for="bukti_pembayaran" class="form-label">Bukti Pembayaran (gambar)</label>
+        <input type="file" name="bukti_pembayaran" id="bukti_pembayaran" class="form-control" accept="image/*">
+
+        @if(isset($order) && $order->bukti_pembayaran)
+            <p class="mt-2">File saat ini:</p>
+            <img src="{{ asset('storage/bukti_pembayaran/' . $order->bukti_pembayaran) }}" alt="Bukti Pembayaran" style="max-width: 200px; border-radius: 8px; margin-top: 5px;">
+        @endif
+    </div>
 
         <button type="submit" class="btn btn-primary">
             {{ isset($order) ? 'Update' : 'Simpan' }}

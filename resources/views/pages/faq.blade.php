@@ -29,7 +29,7 @@
                 <!-- FAQ 2 -->
                 <div class="bg-gray-100 p-6 rounded-lg shadow">
                     <h2 class="text-xl font-semibold mb-2">Bagaimana cara memesan makanan?</h2>
-                    <p>Silakan kunjungi halaman <a href="{{ route('menu') }}" class="text-red-600 underline">Menu</a>, pilih makanan yang Anda suka, lalu klik "Tambah ke Keranjang" dan lanjutkan ke proses checkout.</p>
+                    <p>Silakan kunjungi halaman <a href="{{ route('menu') }}" class="text-red-600 underline">Menu</a>, pilih makanan yang Anda suka, lalu klik "Pesan" dan lanjutkan ke proses checkout.</p>
                 </div>
 
                 <!-- FAQ 3 -->

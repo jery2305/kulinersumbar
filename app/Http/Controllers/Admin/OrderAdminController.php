@@ -31,29 +31,48 @@ class OrderAdminController extends Controller
             'status' => 'required|string',
             'resi' => 'nullable|string',
             'total' => 'required|numeric',
+            'bukti_pembayaran' => 'nullable|image|max:2048', // max 2MB
         ]);
 
-        Order::create($data);
+    if ($request->hasFile('bukti_pembayaran')) {
+            $file = $request->file('bukti_pembayaran');
+            $filename = time().'_'.$file->getClientOriginalName();
+            $file->storeAs('public/bukti_pembayaran', $filename);
+            $validated['bukti_pembayaran'] = $filename;
+        }
+
+        Order::create($validated);
 
         return redirect()->route('admin.order.index')->with('success', 'Order berhasil ditambahkan.');
     }
 
-    public function update(Request $request, $id)
+   public function update(Request $request, Order $order)
     {
-        $order = Order::findOrFail($id);
-
-        $data = $request->validate([
+        $validated = $request->validate([
             'user_id' => 'required|integer',
-            'nama' => 'required|string|max:255',
+            'nama' => 'required|string',
             'alamat' => 'required|string',
-            'telepon' => 'required|string|max:20',
+            'telepon' => 'required|string',
             'pembayaran' => 'required|string',
             'status' => 'required|string',
             'resi' => 'nullable|string',
-            'total' => 'required|numeric',
+            'total' => 'required|numeric|min:0',
+            'bukti_pembayaran' => 'nullable|image|max:2048',
         ]);
 
-        $order->update($data);
+        if ($request->hasFile('bukti_pembayaran')) {
+            // Hapus file lama jika ada
+            if ($order->bukti_pembayaran && \Storage::exists('public/bukti_pembayaran/' . $order->bukti_pembayaran)) {
+                \Storage::delete('public/bukti_pembayaran/' . $order->bukti_pembayaran);
+            }
+
+            $file = $request->file('bukti_pembayaran');
+            $filename = time().'_'.$file->getClientOriginalName();
+            $file->storeAs('public/bukti_pembayaran', $filename);
+            $validated['bukti_pembayaran'] = $filename;
+        }
+
+        $order->update($validated);
 
         return redirect()->route('admin.order.index')->with('success', 'Order berhasil diperbarui.');
     }

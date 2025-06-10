@@ -51,6 +51,7 @@ Route::get('/about', [AboutController::class, 'index']);
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 Route::post('/pesan', [MenuController::class, 'pesan'])->name('pesan');
 Route::post('/menu/{menuId}/review', [MenuController::class, 'addReview'])->name('menu.addReview');
+Route::get('/menu/{id}/review', [MenuController::class, 'reviewPage'])->name('menu.reviewPage');
 
 //Contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
@@ -73,6 +74,7 @@ Route::get('/checkout/success', [CartController::class, 'success'])->name('check
 Route::middleware('auth')->group(function () {
     Route::get('/orders', [OrderController::class, 'history'])->name('orders.history');
     Route::post('/orders/{id}/status', [OrderController::class, 'updateStatus'])->name('orders.update.status');
+    Route::post('/orders/{order}/upload-bukti', [OrderController::class, 'uploadBukti'])->name('orders.uploadBukti');
 });
 
 //team
@@ -119,7 +121,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('order/store', [OrderAdminController::class, 'store'])->name('order.store');
     Route::put('order/update/{id}', [OrderAdminController::class, 'update'])->name('order.update');
     Route::delete('order/delete/{id}', [OrderAdminController::class, 'destroy'])->name('order.destroy');
-     Route::post('order/confirm/{id}', [OrderAdminController::class, 'confirm'])->name('order.confirm');
+    Route::post('order/confirm/{id}', [OrderAdminController::class, 'confirm'])->name('order.confirm');
+    Route::post('order/upload-bukti/{id}', [OrderAdminController::class, 'uploadBukti'])->name('order.uploadBukti');
 });
 
 //OrderItem

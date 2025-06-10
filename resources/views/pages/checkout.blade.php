@@ -18,10 +18,22 @@
 
         <form action="{{ route('process-checkout') }}" method="POST" class="space-y-4">
             @csrf
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
-                <input type="text" name="nama" required class="mt-1 block w-full border border-gray-300 rounded-lg p-2">
-            </div>
+
+            @auth
+                <!-- Input nama sudah terisi dan readonly supaya tidak bisa diubah -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                    <input type="text" name="nama" value="{{ Auth::user()->name }}" readonly 
+                        class="mt-1 block w-full border border-gray-300 rounded-lg p-2 bg-gray-100 cursor-not-allowed">
+                </div>
+            @else
+                <!-- Jika belum login, input nama bisa diisi manual -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                    <input type="text" name="nama" required class="mt-1 block w-full border border-gray-300 rounded-lg p-2">
+                </div>
+            @endauth
+
             <div>
                 <label class="block text-sm font-medium text-gray-700">Alamat Pengiriman</label>
                 <textarea name="alamat" required class="mt-1 block w-full border border-gray-300 rounded-lg p-2"></textarea>

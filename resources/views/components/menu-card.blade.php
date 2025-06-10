@@ -16,17 +16,10 @@
             </button>
         </form>
 
-        <!-- Ulasan dan Rating -->
-        @if($canReview)
-            <x-review-form 
-                :menu="$menu" 
-                :success="session('success_menu_id') === $menu->id ? session('success') : null"/>
-        @else
-            <div class="mt-4 border-t pt-4 text-sm text-gray-500 italic">
-                <span class="text-yellow-600 mr-2">🔒</span>
-                Anda harus memesan menu ini terlebih dahulu dan pesanan dikonfirmasi <strong>selesai</strong> sebelum bisa memberi ulasan.
-            </div>
-        @endif
-
+        <!-- Tombol ke halaman review -->
+        <a href="{{ route('menu.reviewPage', $menu->id) }}" 
+            class="block w-full text-center mt-4 bg-yellow-500 text-white py-2 rounded hover:bg-yellow-600 transition">
+            Rating & Ulasan
+        </a>
     </div>
 </div>
