@@ -9,7 +9,7 @@ class Rating extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['rating', 'review', 'menu_id'];
+    protected $fillable = ['rating', 'review', 'menu_id', 'user_id'];
 
     /**
      * Relasi ke menu yang diberi rating.

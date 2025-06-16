@@ -10,9 +10,27 @@ use Illuminate\Http\Request;
 
 class OrderItemAdminController extends Controller
 {
-    public function index()
+   public function index(Request $request)
     {
-        $orderItems = OrderItem::with(['order', 'menu'])->latest()->paginate(10);
+        $query = OrderItem::with(['order', 'menu']);
+
+        // Filter berdasarkan tanggal
+        if ($request->filled('tanggal')) {
+            $query->whereDate('created_at', $request->tanggal);
+        }
+
+        // Filter berdasarkan bulan
+        if ($request->filled('bulan')) {
+            $query->whereMonth('created_at', $request->bulan);
+        }
+
+        // Filter berdasarkan tahun
+        if ($request->filled('tahun')) {
+            $query->whereYear('created_at', $request->tahun);
+        }
+
+        $orderItems = $query->latest()->paginate(10);
+
         return view('admin.orderitem.index', compact('orderItems'));
     }
 

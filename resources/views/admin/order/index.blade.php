@@ -43,16 +43,28 @@
                     <td>{{ $order->alamat }}</td>
                     <td>{{ $order->telepon }}</td>
                     <td>{{ $order->pembayaran }}</td>
-                    <td class="text-center">{{ ucfirst($order->status) }}</td>
+                    @php
+                        $badgeClass = strtolower($order->status) === 'selesai'
+                            ? 'bg-success'
+                            : 'bg-secondary';
+                    @endphp
+                    <td class="text-center">
+                        <span class="badge {{ $badgeClass }}">{{ ucfirst($order->status) }}</span>
+                    </td>
+                    
                     <td>{{ $order->resi ?? '-' }}</td>
                     <td class="text-end">Rp {{ number_format($order->total, 0, ',', '.') }}</td>
                     
                     <td class="text-center">
-                    @if($order->bukti_pembayaran)
-                        <img src="{{ asset($order->bukti_pembayaran) }}" alt="Bukti Pembayaran" style="max-width: 100px; border-radius: 6px;">
-                    @else
-                       <span class="text-muted fst-italic">Belum dikirim</span>
-                    @endif
+                        @if($order->bukti_pembayaran)
+                            <img src="{{ asset($order->bukti_pembayaran) }}" 
+                                alt="Bukti Pembayaran" 
+                                style="max-width: 100px; border-radius: 6px; cursor: pointer;" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#modalBukti{{ $order->id }}">
+                        @else
+                            <span class="text-muted fst-italic">Belum dikirim</span>
+                        @endif
                     </td>
 
                     <td class="text-center">
@@ -95,6 +107,28 @@
                 </tr>
             @endforelse
         </tbody>
+            @foreach($orders as $order)
+                @if($order->bukti_pembayaran)
+                <!-- Modal -->
+                <div class="modal fade" id="modalBukti{{ $order->id }}" tabindex="-1" aria-labelledby="modalLabel{{ $order->id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel{{ $order->id }}">Bukti Pembayaran - Order #{{ $order->id }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                            <img 
+                                src="{{ asset($order->bukti_pembayaran) }}" 
+                                alt="Bukti Pembayaran" 
+                                class="img-fluid rounded shadow" 
+                                style="max-height: 350px; max-width: 100%; object-fit: contain;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endforeach
     </table>
 
     <div class="d-flex justify-content-center">

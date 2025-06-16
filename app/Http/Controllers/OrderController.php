@@ -27,18 +27,17 @@ class OrderController extends Controller
     {
         $cart = session()->get('cart', []);
 
-        // Simulasi data menu
-        $menu = [
-            'rendang' => ['name' => 'Rendang', 'price' => 25000],
-            'sate_padang' => ['name' => 'Sate Padang', 'price' => 20000],
-            'dendeng_balado' => ['name' => 'Dendeng Balado', 'price' => 30000],
+        // Ambil data menu dari database
+        $menu = Menu::where('slug', $request->menu)->firstOrFail();
+
+        $item = [
+            'name' => $menu->name,
+            'price' => $menu->price,
+            'quantity' => $request->jumlah,
+            'note' => $request->catatan,
+            'menu_id' => $menu->id
         ];
 
-        $item = $menu[$request->menu];
-        $item['quantity'] = $request->jumlah;
-        $item['note'] = $request->catatan;
-
-        // Simpan ke keranjang
         $cart[] = $item;
         session()->put('cart', $cart);
 
@@ -103,7 +102,7 @@ class OrderController extends Controller
    public function uploadBukti(Request $request, $id)
     {
         $request->validate([
-            'bukti' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'bukti' => 'required|image|mimes:jpeg,png,jpg|max:5120',
         ]);
 
         $order = Order::findOrFail($id);

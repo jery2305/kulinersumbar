@@ -38,7 +38,7 @@ class CartController extends Controller
 
         session()->put('cart', $cart);
 
-        return redirect()->route('cart.index')->with('success', 'Item berhasil ditambahkan ke keranjang!');
+        return redirect()->back()->with('success', 'Item berhasil ditambahkan ke keranjang!');
     }
 
     // Hapus item dari keranjang

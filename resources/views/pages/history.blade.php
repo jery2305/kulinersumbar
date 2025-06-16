@@ -18,7 +18,7 @@
         @else
             <div class="space-y-6">
                 @foreach($orders as $order)
-                    <div class="bg-white rounded-lg shadow p-6 mb-6">
+                    <div class="bg-white rounded-lg shadow p-6">
                         <div class="flex justify-between items-start">
                             <div>
                                 @if(in_array($order->status, ['Diproses', 'Dikirim', 'Selesai']) && $order->resi)
@@ -50,8 +50,8 @@
                                 @php $total = 0; @endphp
                                 @foreach($order->items as $item)
                                     @php 
-                                        $sub = $item->price * $item->quantity; 
-                                        $total += $sub; 
+                                        $sub = $item->price * $item->quantity;
+                                        $total += $sub;
                                     @endphp
                                     <li>{{ $item->quantity }} x {{ $item->menu->name }} (Rp {{ number_format($sub, 0, ',', '.') }})</li>
                                 @endforeach
@@ -59,7 +59,19 @@
                             <p class="text-right font-semibold mt-3">Total: Rp {{ number_format($total, 0, ',', '.') }}</p>
                         </div>
 
-                        <!-- Form Upload Bukti Pembayaran  -->
+                         @if($order->status === 'Selesai')
+                        <div class="mt-4">
+                            <button 
+                                type="button"
+                                data-modal-target="modalStruk{{ $order->id }}"
+                                data-modal-toggle="modalStruk{{ $order->id }}"
+                                class="text-sm px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded">
+                                Lihat Struk
+                            </button>
+                        </div>
+                        <x-order-struk-modal :order="$order" />
+                    @endif
+
                         @if($order->status === 'Menunggu Pembayaran')
                             @if($order->bukti_pembayaran)
                                 <div class="mt-4 text-green-600 font-medium flex items-center gap-2">
@@ -85,12 +97,11 @@
                         @endif
                     </div>
                 @endforeach
-
             </div>
 
             <!-- Pagination -->
             <div class="mt-6 text-center">
-                {{ $orders->links() }}  <!-- Paginasi akan muncul jika $orders dipaginasi -->
+                {{ $orders->links() }}
             </div>
         @endif
     </div>
