@@ -22,7 +22,7 @@
             <div class="space-y-6">
                 <!-- FAQ 1 -->
                 <div class="bg-gray-100 p-6 rounded-lg shadow">
-                    <h2 class="text-xl font-semibold mb-2">Bagaimana cara mendaftar akun di website ini?</h2>
+                    <h2 class="text-xl font-semibold mb-2">Bagaimana cara mendaftar akun di website inii?</h2>
                     <p>Untuk mendaftar akun, klik tombol "Daftar" yang terdapat di halaman beranda atau halaman login. Isikan data diri Anda, seperti nama, email, dan password, kemudian klik "Kirim" untuk membuat akun baru.</p>
                 </div>
                 
