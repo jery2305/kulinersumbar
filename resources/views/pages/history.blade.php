@@ -7,11 +7,10 @@
     <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
 </head>
 <body class="bg-gray-50 font-sans">
-
     <x-navbar />
 
     <div class="max-w-5xl mx-auto py-12 px-6">
-        <h1 class="text-4xl font-extrabold text-center text-yellow-700 mb-10">🛒 Histori Pemesanan</h1>
+        <h1 class="text-4xl font-extrabold text-center text-black-700 mb-10">Histori Pemesanan</h1>
 
         @if($orders->isEmpty())
             <div class="text-center text-gray-600 text-lg">
@@ -29,7 +28,7 @@
                             'border-gray-400' => $order->status === 'Dibatalkan',
                         ])">
 
-                        <!-- Waktu & Resi -->
+                        <!-- Informasi Waktu & Status -->
                         <div class="md:w-1/3 mb-4 md:mb-0 md:pr-6 border-r md:border-r-gray-200">
                             <p class="text-sm text-gray-500">{{ $order->created_at->format('d M Y H:i') }}</p>
 
@@ -64,16 +63,21 @@
                                         $sub = $item->price * $item->quantity;
                                         $total += $sub;
                                     @endphp
-                                    <li>🍽 {{ $item->quantity }} x {{ $item->menu->name }} <span class="text-gray-500">(Rp {{ number_format($sub, 0, ',', '.') }})</span></li>
+                                    <li>🍽 {{ $item->quantity }} x {{ $item->menu->name }} 
+                                        <span class="text-gray-500">(Rp {{ number_format($sub, 0, ',', '.') }})</span>
+                                    </li>
                                 @endforeach
                             </ul>
-                            <p class="text-right text-base font-bold text-gray-800 mt-3">Total: Rp {{ number_format($total, 0, ',', '.') }}</p>
+                            <p class="text-right text-base font-bold text-gray-800 mt-3">
+                                Total: Rp {{ number_format($total, 0, ',', '.') }}
+                            </p>
 
                             <!-- Tombol Aksi -->
-                            <div class="mt-4 space-x-2">
+                            <div class="mt-4 space-y-3">
+
+                                {{-- Tombol Struk (jika status selesai) --}}
                                 @if($order->status === 'Selesai')
-                                    <button 
-                                        type="button"
+                                    <button type="button"
                                         data-modal-target="modalStruk{{ $order->id }}"
                                         data-modal-toggle="modalStruk{{ $order->id }}"
                                         class="text-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded shadow">
@@ -82,7 +86,22 @@
                                     <x-order-struk-modal :order="$order" />
                                 @endif
 
-                                @if($order->status === 'Menunggu Pembayaran')
+                                {{-- COD - Upload bukti saat Dikirim --}}
+                                @if($order->pembayaran === 'COD' && $order->status === 'Dikirim')
+                                    @if(!$order->bukti_pembayaran)
+                                        <form action="{{ route('orders.uploadBukti', $order->id) }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <label class="block mb-1 text-sm font-medium">Upload Bukti Pembayaran (COD):</label>
+                                            <input type="file" name="bukti" accept="image/*" required class="block w-full text-sm text-gray-700 file:bg-green-100 file:text-green-800 file:rounded file:px-3 file:py-1 hover:file:bg-green-200"/>
+                                            <button type="submit" class="mt-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm rounded">Kirim Bukti</button>
+                                        </form>
+                                    @else
+                                        <p class="text-green-700 font-medium mt-2">✅ Bukti pembayaran sudah dikirim.</p>
+                                    @endif
+                                @endif
+
+                                {{-- Transfer - Menunggu pembayaran --}}
+                                @if($order->status === 'Menunggu Pembayaran' && $order->pembayaran !== 'COD')
                                     @if($order->bukti_pembayaran)
                                         <p class="mt-2 text-green-600 font-medium flex items-center gap-2">
                                             <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,12 +110,13 @@
                                             Bukti pembayaran sudah dikirim.
                                         </p>
                                     @else
-                                        <form action="{{ route('orders.uploadBukti', $order->id) }}" method="POST" enctype="multipart/form-data" class="mt-4">
+                                        <form action="{{ route('orders.uploadBukti', $order->id) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <label class="block mb-1 text-sm font-medium">Upload Bukti Pembayaran:</label>
                                             <input type="file" name="bukti" accept="image/*" required class="block w-full text-sm text-gray-700 file:bg-yellow-100 file:text-yellow-800 file:rounded file:px-3 file:py-1 hover:file:bg-yellow-200"/>
                                             <button type="submit" class="mt-2 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white text-sm rounded">Kirim Bukti</button>
                                         </form>
+
                                         <form action="{{ route('orders.cancel', $order->id) }}" method="POST" onsubmit="return confirm('Batalkan pesanan ini?');" class="mt-2">
                                             @csrf
                                             @method('PATCH')
@@ -106,6 +126,7 @@
                                         </form>
                                     @endif
                                 @endif
+
                             </div>
                         </div>
                     </div>
@@ -120,6 +141,5 @@
     </div>
 
     <x-footer />
-
 </body>
 </html>

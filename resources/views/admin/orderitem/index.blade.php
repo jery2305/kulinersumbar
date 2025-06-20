@@ -53,14 +53,14 @@
         </div>
     </div>
 
-    <!-- 📊 Rekap Penjualan -->
+    <!-- Rekap Penjualan -->
     <div class="row mb-4 g-3">
         <div class="col-md-4">
             <div class="card shadow-sm border-0 bg-success bg-opacity-10">
                 <div class="card-body">
                     <h6 class="text-muted">Total Pendapatan</h6>
                     <h4 class="fw-bold text-success">
-                        Rp{{ number_format($orderItems->sum(fn($i) => $i->price * $i->quantity), 0, ',', '.') }}
+                        Rp{{ number_format($allItems->sum(fn($i) => $i->price * $i->quantity), 0, ',', '.') }}
                     </h4>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                 <div class="card-body">
                     <h6 class="text-muted">Total Item Terjual</h6>
                     <h4 class="fw-bold text-primary">
-                        {{ $orderItems->sum('quantity') }}
+                        {{ $allItems->sum('quantity') }}
                     </h4>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                 <div class="card-body">
                     <h6 class="text-muted">Jumlah Transaksi</h6>
                     <h4 class="fw-bold text-dark">
-                        {{ $orderItems->count() }}
+                        {{ $allItems->count() }}
                     </h4>
                 </div>
             </div>

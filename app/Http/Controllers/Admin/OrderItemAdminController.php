@@ -29,9 +29,13 @@ class OrderItemAdminController extends Controller
             $query->whereYear('created_at', $request->tahun);
         }
 
-        $orderItems = $query->latest()->paginate(10);
+        // Ambil semua data untuk totalan
+        $allItems = $query->get(); // <-- untuk total seluruh data
 
-        return view('admin.orderitem.index', compact('orderItems'));
+        // Paginate untuk tampilan tabel
+        $orderItems = $query->paginate(10);
+
+        return view('admin.orderitem.index', compact('orderItems', 'allItems'));
     }
 
     public function form($id = null, $orderId = null)
