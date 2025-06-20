@@ -82,7 +82,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders', [OrderController::class, 'history'])->name('orders.history');
     Route::post('/orders/{id}/status', [OrderController::class, 'updateStatus'])->name('orders.update.status');
     Route::post('/orders/{order}/upload-bukti', [OrderController::class, 'uploadBukti'])->name('orders.uploadBukti');
+    Route::patch('/orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
 });
+
 
 //team
 Route::view('/team', 'pages.team')->name('team');

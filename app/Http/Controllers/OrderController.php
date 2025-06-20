@@ -123,5 +123,16 @@ class OrderController extends Controller
 
         return redirect()->back()->with('success', 'Bukti pembayaran berhasil diunggah.');
     }
+    public function cancel(Order $order)
+    {
+        if ($order->status !== 'Menunggu Pembayaran') {
+            return back()->with('error', 'Pesanan tidak dapat dibatalkan.');
+        }
+
+        $order->status = 'Dibatalkan';
+        $order->save();
+
+        return back()->with('success', 'Pesanan berhasil dibatalkan.');
+}
 
 }

@@ -26,7 +26,7 @@
     <!-- Konten Header -->
     <div class="relative z-20 px-4">
         <h2 class="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-md animate-fade-in">
-            Nikmati Kelezatan Kuliner Khas Minannggg!
+            Nikmati Kelezatan Kuliner Khas Minang!
         </h2>
         <p class="mb-6 text-lg md:text-xl text-white/90 animate-fade-in delay-100">
             Jelajahi cita rasa khas Minang dalam setiap hidangan favorit Anda.
