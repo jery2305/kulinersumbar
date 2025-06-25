@@ -2,21 +2,31 @@
     <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         
         <!-- Logo & Deskripsi -->
-        <div>
-            <h2 class="text-2xl font-bold text-white mb-4">MyBrand</h2>
-            <p class="text-sm text-gray-400 leading-relaxed">
-                Menyediakan solusi digital dan produk berkualitas tinggi untuk kebutuhan Anda. Kepuasan Anda prioritas kami.
-            </p>
-        </div>
+       <div>
+    <div class="flex items-center space-x-2 mb-4">
+        <!-- Logo Rumah Gadang -->
+   <div class="w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-lg border border-gray-300">
+    <img src="{{ asset('img/123.png') }}" alt="Logo Rumah Gadang" class="w-7 h-7 object-contain">
+</div>
+
+       <span class="text-2xl md:text-3xl font-extrabold italic tracking-tight text-red-600">
+                    Kuliner<span class="text-yellow-500">Sumbar</span>
+                </span>
+    </div>
+    <p class="text-sm text-gray-400 leading-relaxed">
+        Menyajikan cita rasa <span class="text-white font-medium">Minangkabau otentik</span> dalam satu genggaman. Jelajahi kekayaan rasa dan budaya <span class="text-yellow-300">Sumatera Barat</span> yang khas.
+    </p>
+</div>
+
 
         <!-- Navigasi -->
         <div>
             <h3 class="text-lg font-semibold text-white mb-4">Navigasi</h3>
             <ul class="space-y-2 text-sm">
-                <li><a href="/" class="hover:text-white transition">Beranda</a></li>
-                <li><a href="/produk" class="hover:text-white transition">Produk</a></li>
-                <li><a href="/tentang" class="hover:text-white transition">Tentang Kami</a></li>
-                <li><a href="/kontak" class="hover:text-white transition">Hubungi Kami</a></li>
+                <li><a href="/#" class="hover:text-white transition">Home</a></li>
+                <li><a href="/menu" class="hover:text-white transition">Menu</a></li>
+                <li><a href="about" class="hover:text-white transition">Tentang Kami</a></li>
+                <li><a href="/contact" class="hover:text-white transition">Hubungi Kami</a></li>
             </ul>
         </div>
 
@@ -48,7 +58,7 @@
                     </svg>
                 </a>
                 <!-- WhatsApp -->
-                <a href="https://wa.me/6281234567890" target="_blank" class="hover:text-white transition">
+                <a href="https://wa.me/6289623255564" target="_blank" class="hover:text-white transition">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                         <path
                             d="M20.52 3.48A11.89 11.89 0 0012 0C5.37 0 0 5.37 0 12a11.86 11.86 0 001.7 6.1L0 24l6.32-1.66A11.93 11.93 0 0012 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.2-3.48-8.52zM12 21.6a9.6 9.6 0 01-4.91-1.34l-.35-.2-3.75.98 1-3.66-.23-.38A9.59 9.59 0 1121.6 12c0 5.29-4.31 9.6-9.6 9.6zm5.18-7.26l-1.48-.75c-.2-.1-.43-.17-.66-.09-.21.07-.33.25-.46.41l-.17.21c-.12.15-.27.16-.44.09-1.2-.5-2.1-1.35-2.67-2.51-.1-.21-.1-.39.05-.56.08-.1.19-.22.27-.33.08-.1.18-.22.2-.35.03-.13 0-.28-.06-.4l-.64-1.44c-.15-.33-.53-.5-.86-.39l-.35.1a2.43 2.43 0 00-1.7 2.27c0 .45.12.9.34 1.3 1.14 2.15 3 3.77 5.26 4.63.4.15.82.22 1.23.22.5 0 .99-.13 1.42-.38a2.3 2.3 0 001.06-1.33c.1-.34-.02-.71-.35-.87z"/>
@@ -60,6 +70,6 @@
     </div>
 
     <div class="border-t border-gray-700 mt-10 pt-6 text-center text-sm text-gray-500">
-        &copy; {{ date('Y') }} MyBrand. Dibuat dengan ❤️ di Laravel.
+        &copy; Copyright ©2025 All rights reserved | Kuliner Sumatra Barat
     </div>
 </footer>

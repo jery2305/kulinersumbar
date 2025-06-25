@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\OrderItemAdminController;
 use App\Http\Controllers\Admin\ContactAdminController;
 use App\Http\Controllers\Admin\RatingAdminController;
 
+
 //Route::get('/', function () {
 //    return view('welcome');
 // });
@@ -90,9 +91,29 @@ Route::middleware('auth')->group(function () {
 Route::view('/team', 'pages.team')->name('team');
 
 //FAQ
+
+
 Route::get('/faq', function () {
     return view('pages.faq');
 })->name('faq');
+//syarat
+Route::get('/syarat', function () {
+    return view('pages.syarat');
+})->name('syarat');
+//PRIVASI
+Route::get('/privasi', function () {
+    return view('pages.privasi');
+})->name('privasi');
+//PENGIRIMAN
+Route::get('/pengiriman', function () {
+    return view('pages.pengiriman');
+})->name('pengiriman');
+
+
+
+
+
+
 
 
 
