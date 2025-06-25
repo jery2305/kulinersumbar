@@ -83,45 +83,45 @@ class OrderController extends Controller
     // Menampilkan histori pesanan
     public function history() 
     {
-        $orders = Order::where('user_id', auth()->id())
-        ->with('items.menu')
-        ->orderBy('created_at', 'desc') // <-- pastikan ada ini
-        ->paginate(10);
-        
-        // Hitung total untuk setiap order
-        foreach ($orders as $order) {
-            $order->total_price = $order->items->sum(function ($item) {
-                return $item->price * $item->quantity;  // Menghitung harga total item
-            });
-        }
+            $orders = Order::where('user_id', auth()->id())
+            ->with('items.menu')
+            ->orderBy('created_at', 'desc') // <-- pastikan ada ini
+            ->paginate(10);
+            
+            // Hitung total untuk setiap order
+            foreach ($orders as $order) {
+                $order->total_price = $order->items->sum(function ($item) {
+                    return $item->price * $item->quantity;  // Menghitung harga total item
+                });
+            }
 
-        // Kirim data orders ke tampilan
-        return view('pages.history', compact('orders'));
+            // Kirim data orders ke tampilan
+            return view('pages.history', compact('orders'));
     }
 
    public function uploadBukti(Request $request, $id)
     {
-        $request->validate([
-            'bukti' => 'required|image|mimes:jpeg,png,jpg|max:5120',
-        ]);
+            $request->validate([
+                'bukti' => 'required|image|mimes:jpeg,png,jpg|max:5120',
+            ]);
 
-        $order = Order::findOrFail($id);
+            $order = Order::findOrFail($id);
 
-        if ($request->hasFile('bukti')) {
-            $file = $request->file('bukti');
+            if ($request->hasFile('bukti')) {
+                $file = $request->file('bukti');
 
-            // Simpan dengan nama asli
-            $filename = $file->getClientOriginalName();
+                // Simpan dengan nama asli
+                $filename = $file->getClientOriginalName();
 
-            // Pindahkan ke folder public/img
-            $path = $file->move(public_path('img'), $filename);
+                // Pindahkan ke folder public/img
+                $path = $file->move(public_path('img'), $filename);
 
-            // Simpan path relatif ke database
-            $order->bukti_pembayaran = 'img/' . $filename;
-            $order->save();
-        }
+                // Simpan path relatif ke database
+                $order->bukti_pembayaran = 'img/' . $filename;
+                $order->save();
+            }
 
-        return redirect()->back()->with('success', 'Bukti pembayaran berhasil diunggah.');
+            return redirect()->back()->with('success', 'Bukti pembayaran berhasil diunggah.');
     }
     public function cancel(Order $order)
     {

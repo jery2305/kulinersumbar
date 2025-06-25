@@ -21,11 +21,11 @@
                 @foreach($orders as $order)
                     <div class="flex flex-col md:flex-row bg-white border-l-4 shadow-lg rounded-lg p-6 
                         @class([
-                            'border-yellow-400' => $order->status === 'Menunggu Pembayaran',
-                            'border-blue-500' => $order->status === 'Diproses',
-                            'border-purple-500' => $order->status === 'Dikirim',
-                            'border-green-500' => $order->status === 'Selesai',
-                            'border-gray-400' => $order->status === 'Dibatalkan',
+                                'border-yellow-400' => $order->status === 'Menunggu Pembayaran',
+                                'border-blue-500' => $order->status === 'Diproses',
+                                'border-purple-500' => $order->status === 'Dikirim',
+                                'border-green-500' => $order->status === 'Selesai',
+                                'border-gray-400' => $order->status === 'Dibatalkan',
                         ])">
 
                         <!-- Informasi Waktu & Status -->
@@ -39,12 +39,12 @@
                             <div class="mt-3">
                                 @php
                                     $statusBadge = match($order->status) {
-                                        'Menunggu Pembayaran' => ['label' => '⏳ Menunggu Pembayaran', 'color' => 'text-yellow-700 bg-yellow-100'],
-                                        'Diproses' => ['label' => '🔧 Diproses', 'color' => 'text-blue-700 bg-blue-100'],
-                                        'Dikirim' => ['label' => '🚚 Dikirim', 'color' => 'text-purple-700 bg-purple-100'],
-                                        'Selesai' => ['label' => '✅ Selesai', 'color' => 'text-green-700 bg-green-100'],
-                                        'Dibatalkan' => ['label' => '❌ Dibatalkan', 'color' => 'text-gray-600 bg-gray-200'],
-                                        default => ['label' => $order->status, 'color' => 'text-gray-700 bg-gray-100'],
+                                    'Menunggu Pembayaran' => ['label' => '⏳ Menunggu Pembayaran', 'color' => 'text-yellow-700 bg-yellow-100'],
+                                    'Diproses' => ['label' => '🔧 Diproses', 'color' => 'text-blue-700 bg-blue-100'],
+                                    'Dikirim' => ['label' => '🚚 Dikirim', 'color' => 'text-purple-700 bg-purple-100'],
+                                    'Selesai' => ['label' => '✅ Selesai', 'color' => 'text-green-700 bg-green-100'],
+                                    'Dibatalkan' => ['label' => '❌ Dibatalkan', 'color' => 'text-gray-600 bg-gray-200'],
+                                    default => ['label' => $order->status, 'color' => 'text-gray-700 bg-gray-100'],
                                     };
                                 @endphp
                                 <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold {{ $statusBadge['color'] }}">
@@ -57,12 +57,12 @@
                         <div class="md:w-2/3 md:pl-6">
                             <p class="font-semibold mb-2 text-gray-800">Detail Pesanan:</p>
                             <ul class="text-sm space-y-1">
-                                @php $total = 0; @endphp
-                                @foreach($order->items as $item)
-                                    @php 
-                                        $sub = $item->price * $item->quantity;
-                                        $total += $sub;
-                                    @endphp
+                                    @php $total = 0; @endphp
+                                    @foreach($order->items as $item)
+                                        @php 
+                                            $sub = $item->price * $item->quantity;
+                                            $total += $sub;
+                                        @endphp
                                     <li>🍽 {{ $item->quantity }} x {{ $item->menu->name }} 
                                         <span class="text-gray-500">(Rp {{ number_format($sub, 0, ',', '.') }})</span>
                                     </li>
