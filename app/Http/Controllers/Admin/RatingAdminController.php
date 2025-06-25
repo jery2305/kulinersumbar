@@ -11,7 +11,7 @@ class RatingAdminController extends Controller
 {
     public function index()
     {
-        $ratings = Rating::with('menu')->latest()->get();
+        $ratings = Rating::orderBy('rating', 'desc')->get();
         return view('admin.rating.index', compact('ratings'));
     }
 
