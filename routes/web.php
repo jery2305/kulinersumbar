@@ -87,12 +87,8 @@ Route::middleware('auth')->group(function () {
 });
 
 
-//team
-Route::view('/team', 'pages.team')->name('team');
 
 //FAQ
-
-
 Route::get('/faq', function () {
     return view('pages.faq');
 })->name('faq');
@@ -108,10 +104,6 @@ Route::get('/privasi', function () {
 Route::get('/pengiriman', function () {
     return view('pages.pengiriman');
 })->name('pengiriman');
-
-
-
-
 
 
 
