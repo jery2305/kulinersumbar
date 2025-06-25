@@ -44,9 +44,14 @@
                     <td>{{ $order->telepon }}</td>
                     <td>{{ $order->pembayaran }}</td>
                     @php
-                        $badgeClass = strtolower($order->status) === 'selesai'
-                            ? 'bg-success'
-                            : 'bg-secondary';
+                        $statusLower = strtolower($order->status);
+                        if ($statusLower === 'selesai') {
+                            $badgeClass = 'bg-success';
+                        } elseif ($statusLower === 'dibatalkan') {
+                            $badgeClass = 'bg-danger'; // warna merah
+                        } else {
+                            $badgeClass = 'bg-secondary'; // default abu-abu
+                        }
                     @endphp
                     <td class="text-center">
                         <span class="badge {{ $badgeClass }}">{{ ucfirst($order->status) }}</span>
