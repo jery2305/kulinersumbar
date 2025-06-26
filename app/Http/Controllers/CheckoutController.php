@@ -44,7 +44,7 @@ class CheckoutController extends Controller
         $order->pembayaran = $data['pembayaran'];
         $order->resi = $resi;
         $order->total = $total;
-        $order->status = 'Menunggu Pembayaran';
+        $order->status = strtoupper($data['pembayaran']) === 'COD' ? 'Diproses' : 'Menunggu Pembayaran';
         $order->save();
 
         // Simpan item ke order_items

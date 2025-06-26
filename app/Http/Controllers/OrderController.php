@@ -62,24 +62,6 @@ class OrderController extends Controller
         return view('pages.checkout', compact('cart'));
     }
 
-    // Memproses checkout
-    public function processCheckout(Request $request)
-    {
-        // Lakukan pemrosesan pemesanan seperti menyimpan ke database, dll.
-        // Untuk sekarang, anggap pemesanan berhasil.
-
-        $order = new Order();
-        $order->user_id = auth()->id(); // Ambil ID user yang sedang login
-        $order->total = $request->total; // Anda bisa menyimpan total harga di sini
-        $order->status = 'Menunggu Pembayaran'; // Misalnya status awal
-        $order->save(); // Simpan data pesanan
-
-        // Mengosongkan keranjang setelah checkout
-        session()->forget('cart');
-
-        return redirect()->route('cart')->with('message', 'Pesanan Anda berhasil diproses!');
-    }
-
     // Menampilkan histori pesanan
     public function history() 
     {
@@ -99,6 +81,7 @@ class OrderController extends Controller
             return view('pages.history', compact('orders'));
     }
 
+    //Input Upload Bukti Foto
    public function uploadBukti(Request $request, $id)
     {
             $request->validate([
@@ -123,6 +106,8 @@ class OrderController extends Controller
 
             return redirect()->back()->with('success', 'Bukti pembayaran berhasil diunggah.');
     }
+
+    // Batalkan Pesanan
     public function cancel(Order $order)
     {
         if ($order->status !== 'Menunggu Pembayaran') {
@@ -133,6 +118,20 @@ class OrderController extends Controller
         $order->save();
 
         return back()->with('success', 'Pesanan berhasil dibatalkan.');
-}
+    }
 
+    // Konfirmasi Pemesanan
+    public function konfirmasiSelesai($id)
+    {
+        $order = Order::findOrFail($id);
+
+        if ($order->status === 'Dikirim') {
+            $order->status = 'Selesai';
+            $order->save();
+
+            return back()->with('success', 'Pesanan berhasil dikonfirmasi sebagai selesai.');
+        }
+
+        return back()->with('error', 'Status pesanan tidak valid untuk dikonfirmasi.');
+    }
 }

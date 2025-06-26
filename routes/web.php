@@ -84,6 +84,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/orders/{id}/status', [OrderController::class, 'updateStatus'])->name('orders.update.status');
     Route::post('/orders/{order}/upload-bukti', [OrderController::class, 'uploadBukti'])->name('orders.uploadBukti');
     Route::patch('/orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
+    Route::patch('/orders/{id}/selesai', [OrderController::class, 'konfirmasiSelesai'])->name('orders.konfirmasiSelesai');
 });
 
 

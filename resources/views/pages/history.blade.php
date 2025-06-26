@@ -75,7 +75,24 @@
                             <!-- Tombol Aksi -->
                             <div class="mt-4 space-y-3">
 
-                                {{-- Tombol Struk (jika status selesai) --}}
+                            <!-- Konfirmasi pesanan diterima -->
+                                @if($order->status === 'Dikirim')
+                                    @if($order->pembayaran === 'COD' && !$order->bukti_pembayaran)
+                                        <p class="text-red-600 text-sm font-semibold">
+                                            ⚠️ Silakan upload bukti pembayaran terlebih dahulu untuk konfirmasi pesanan.
+                                        </p>
+                                    @else
+                                        <form action="{{ route('orders.konfirmasiSelesai', $order->id) }}" method="POST" onsubmit="return confirm('Konfirmasi bahwa pesanan sudah diterima?')">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" class="text-sm px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded shadow">
+                                                ✅ Pesanan Diterima
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endif
+
+                                <!-- Tombol Struk (jika status selesai) -->
                                 @if($order->status === 'Selesai')
                                     <button type="button"
                                         data-modal-target="modalStruk{{ $order->id }}"
@@ -86,7 +103,7 @@
                                     <x-order-struk-modal :order="$order" />
                                 @endif
 
-                                {{-- COD - Upload bukti saat Dikirim --}}
+                                 <!-- COD - Upload bukti saat Dikirim  -->
                                 @if($order->pembayaran === 'COD' && $order->status === 'Dikirim')
                                     @if(!$order->bukti_pembayaran)
                                         <form action="{{ route('orders.uploadBukti', $order->id) }}" method="POST" enctype="multipart/form-data">
@@ -100,7 +117,7 @@
                                     @endif
                                 @endif
 
-                                {{-- Transfer - Menunggu pembayaran --}}
+                               <!-- Transfer - Menunggu pembayaran  -->
                                 @if($order->status === 'Menunggu Pembayaran' && $order->pembayaran !== 'COD')
                                     @if($order->bukti_pembayaran)
                                         <p class="mt-2 text-green-600 font-medium flex items-center gap-2">
