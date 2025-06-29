@@ -19,14 +19,14 @@
 
             <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white text-red-600" class="space-y-3">
                 <!-- FAQ 1 -->
-                <div class="border-b border-gray-200">
-                    <h2 id="faq-1">
-                        <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-700" data-accordion-target="#faq-1-body" aria-expanded="true" aria-controls="faq-1-body">
-                            <span>Bagaimana cara mendaftar akun di website ini?</span>
-                            <svg data-accordion-icon class="w-4 h-4 rotate-180 shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
+                    <div class="border-b border-gray-200">
+                        <h2 id="faq-1">
+                            <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-700" data-accordion-target="#faq-1-body" aria-expanded="true" aria-controls="faq-1-body">
+                                <span>Bagaimana cara mendaftar akun di website ini?</span>
+                                <svg data-accordion-icon class="w-4 h-4 rotate-180 shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
                     </h2>
                     <div id="faq-1-body" class="hidden" aria-labelledby="faq-1">
                         <div class="py-4 text-gray-600">
