@@ -12,7 +12,7 @@
         <li>Kami hanya mengumpulkan data yang diperlukan untuk keperluan transaksi dan layanan pelanggan.</li>
         <li>Data pribadi Anda tidak akan dibagikan kepada pihak ketiga tanpa izin Anda, kecuali diwajibkan oleh hukum.</li>
         <li>Kami menggunakan keamanan standar industri untuk melindungi data Anda.</li>
-        <li>Anda dapat meminta penghapusan data pribadi kapan saja melalui kontak kami.</li>
+        <li>Anda dapat meminta penghapusan data pribadi kapan saja melalui kontak kami..</li>
     </ul>
 </div>
 @endsection

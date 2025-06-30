@@ -79,7 +79,7 @@
             <div class="card shadow-sm border-0 bg-secondary bg-opacity-10">
                 <div class="card-body">
                     <h6 class="text-muted">Jumlah Transaksi</h6>
-                    <h4 class="fw-bold text-dark">
+                    <h4 class="fw-bold text-dark"> 
                         {{ $allItems->count() }}
                     </h4>
                 </div>
@@ -98,9 +98,10 @@
     </div>
     <canvas id="grafikTransaksi" height="100"></canvas>
 
+
     <!-- ➕ Tambah Order Item -->
     <a href="{{ route('admin.orderitem.form') }}" class="btn btn-primary my-3">
-        + Tambah Order Item
+    + Tambah Order Item
     </a>
 
     <!-- 📋 Tabel Order Item -->
@@ -137,6 +138,7 @@
             </tbody>
         </table>
 
+        
         <!-- 📄 Navigasi Halaman -->
         <div class="mt-3 d-flex justify-content-center">
             {{ $orderItems->withQueryString()->links('pagination::bootstrap-5') }}
