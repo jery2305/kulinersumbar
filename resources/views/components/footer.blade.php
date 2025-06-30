@@ -8,10 +8,9 @@
    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-lg border border-gray-300">
     <img src="{{ asset('img/123.png') }}" alt="Logo Rumah Gadang" class="w-7 h-7 object-contain">
 </div>
-
-       <span class="text-2xl md:text-3xl font-extrabold italic tracking-tight text-red-600">
-                    Kuliner<span class="text-yellow-500">Sumbar</span>.
-                </span>
+        <span class="text-2xl md:text-3xl font-extrabold italic tracking-tight text-red-600">
+            Kuliner<span class="text-yellow-500">Sumbar</span>.
+        </span>
     </div>
     <p class="text-sm text-gray-400 leading-relaxed">
         Menyajikan cita rasa <span class="text-white font-medium">Minangkabau otentik</span> dalam satu genggaman. Jelajahi kekayaan rasa dan budaya <span class="text-yellow-300">Sumatera Barat</span> yang khas.
