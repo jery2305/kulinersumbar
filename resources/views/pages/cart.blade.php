@@ -5,7 +5,6 @@
     <title>Keranjang - Kuliner Sumbar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="bg-gray-100 font-sans leading-relaxed tracking-wide">
 
@@ -20,7 +19,7 @@
         <table class="min-w-full bg-white border">
           <thead>
             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-              <th class="py-3 px-6 text-left">Menu</th>
+              <th class="py-3 px-6 text-left">Nama Menu</th>
               <th class="py-3 px-6 text-center">Jumlah</th>
               <th class="py-3 px-6 text-center">Harga</th>
               <th class="py-3 px-6 text-center">Total</th>
@@ -35,12 +34,7 @@
                 $grandTotal += $itemTotal;
               @endphp
               <tr class="border-b border-gray-200 hover:bg-gray-100">
-                 <td class="py-3 px-6 text-left flex items-center gap-4">
-                    <img src="{{ asset('img/' . ($item['image'] ?? 'default.jpg')) }}" 
-                    alt="{{ $item['name'] }}"
-                    class="w-16 h-16 object-cover rounded shadow" />
-                    <span>{{ $item['name'] }}</span>
-                </td>
+                <td class="py-3 px-6 text-left">{{ $item['name'] }}</td>
 
                 <!-- FORM UPDATE JUMLAH -->
                 <td class="py-3 px-6 text-center">
