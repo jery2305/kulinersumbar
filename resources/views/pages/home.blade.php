@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Kuliner Sumbar</title>
+    <title>Kuliner Sumbarrrr </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
     <link href="{{ asset('build/assets/app.css') }}" rel="stylesheet">
