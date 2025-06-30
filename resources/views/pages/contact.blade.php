@@ -6,6 +6,7 @@
   <title>Contact Us | Kuliner Sumbar</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 <body class="bg-gray-50">
 
@@ -88,14 +89,8 @@
     </div>
   </section>
   
-<a href="https://wa.me/6289623255564?text=Halo%20admin,%20saya%20ingin%20bertanya%20tentang%20produk%20Anda." target="_blank"
-   class="fixed bottom-20 right-5 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg z-50">
-    <!-- Icon WhatsApp -->
-    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-        <path
-            d="M20.52 3.48A11.89 11.89 0 0012 0C5.37 0 0 5.37 0 12a11.86 11.86 0 001.7 6.1L0 24l6.32-1.66A11.93 11.93 0 0012 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.2-3.48-8.52zM12 21.6a9.6 9.6 0 01-4.91-1.34l-.35-.2-3.75.98 1-3.66-.23-.38A9.59 9.59 0 1121.6 12c0 5.29-4.31 9.6-9.6 9.6zm5.18-7.26l-1.48-.75c-.2-.1-.43-.17-.66-.09-.21.07-.33.25-.46.41l-.17.21c-.12.15-.27.16-.44.09-1.2-.5-2.1-1.35-2.67-2.51-.1-.21-.1-.39.05-.56.08-.1.19-.22.27-.33.08-.1.18-.22.2-.35.03-.13 0-.28-.06-.4l-.64-1.44c-.15-.33-.53-.5-.86-.39l-.35.1a2.43 2.43 0 00-1.7 2.27c0 .45.12.9.34 1.3 1.14 2.15 3 3.77 5.26 4.63.4.15.82.22 1.23.22.5 0 .99-.13 1.42-.38a2.3 2.3 0 001.06-1.33c.1-.34-.02-.71-.35-.87z" />
-    </svg>
-</a>
+  <!-- Floating WhatsApp Button -->
+  <x-wa-button />
 
   <!-- Footer -->
   <x-footer />

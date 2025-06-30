@@ -10,7 +10,7 @@
 </div>
 
        <span class="text-2xl md:text-3xl font-extrabold italic tracking-tight text-red-600">
-                    Kuliner<span class="text-yellow-500">Sumbar</span>
+                    Kuliner<span class="text-yellow-500">Sumbar</span>.
                 </span>
     </div>
     <p class="text-sm text-gray-400 leading-relaxed">

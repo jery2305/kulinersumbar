@@ -5,6 +5,7 @@
     <title>Checkout - Kuliner Sumbar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <link href="{{ asset('build/assets/app.css') }}" rel="stylesheet">
 </head>
 <body class="bg-gray-50 font-sans">
