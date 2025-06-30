@@ -4,38 +4,54 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\OrderItem;
-use App\Models\Order;
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 class OrderItemAdminController extends Controller
 {
-   public function index(Request $request)
+    public function index(Request $request)
     {
         $query = OrderItem::with(['order', 'menu']);
 
-        // Filter berdasarkan tanggal
+        // Filter input dari form
         if ($request->filled('tanggal')) {
             $query->whereDate('created_at', $request->tanggal);
         }
-
-        // Filter berdasarkan bulan
         if ($request->filled('bulan')) {
             $query->whereMonth('created_at', $request->bulan);
         }
-
-        // Filter berdasarkan tahun
         if ($request->filled('tahun')) {
             $query->whereYear('created_at', $request->tahun);
         }
 
-        // Ambil semua data untuk totalan
-        $allItems = $query->get(); // <-- untuk total seluruh data
-
-        // Paginate untuk tampilan tabel
+        $allItems = $query->get();
         $orderItems = $query->paginate(10);
 
-        return view('admin.orderitem.index', compact('orderItems', 'allItems'));
+        // Sinkronisasi grafik (pastikan pluck bisa bekerja)
+        $perTanggal = collect(
+            $allItems->groupBy(fn($item) => Carbon::parse($item->created_at)->format('Y-m-d'))
+                ->map(fn($group, $key) => (object)['label' => $key, 'total' => $group->sum('quantity')])
+                ->values()
+        );
+
+        $perBulan = collect(
+            $allItems->groupBy(fn($item) => Carbon::parse($item->created_at)->format('F Y'))
+                ->map(fn($group, $key) => (object)['label' => $key, 'total' => $group->sum('quantity')])
+                ->values()
+        );
+
+        $perTahun = collect(
+            $allItems->groupBy(fn($item) => Carbon::parse($item->created_at)->format('Y'))
+                ->map(fn($group, $key) => (object)['label' => $key, 'total' => $group->sum('quantity')])
+                ->values()
+        );
+
+        return view('admin.orderitem.index', compact(
+            'orderItems', 'allItems',
+            'perTanggal', 'perBulan', 'perTahun'
+        ));
     }
 
     public function form($id = null, $orderId = null)
@@ -65,13 +81,12 @@ class OrderItemAdminController extends Controller
         OrderItem::create([
             'order_id'   => $validated['order_id'],
             'menu_id'    => $menu->id,
-            'menu_name'  => $menu->name, // Disimpan agar tetap tampil meski menu diubah
+            'menu_name'  => $menu->name,
             'quantity'   => $validated['quantity'],
             'price'      => $validated['price'],
         ]);
 
-        return redirect()->route('admin.orderitem.index')
-                         ->with('success', 'Order Item berhasil ditambahkan.');
+        return redirect()->route('admin.orderitem.index')->with('success', 'Order Item berhasil ditambahkan.');
     }
 
     public function update(Request $request, $id)
@@ -94,8 +109,7 @@ class OrderItemAdminController extends Controller
             'price'      => $validated['price'],
         ]);
 
-        return redirect()->route('admin.orderitem.index')
-                         ->with('success', 'Order Item berhasil diperbarui.');
+        return redirect()->route('admin.orderitem.index')->with('success', 'Order Item berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -103,7 +117,6 @@ class OrderItemAdminController extends Controller
         $orderItem = OrderItem::findOrFail($id);
         $orderItem->delete();
 
-        return redirect()->route('admin.orderitem.index')
-                         ->with('success', 'Order Item berhasil dihapus.');
+        return redirect()->route('admin.orderitem.index')->with('success', 'Order Item berhasil dihapus.');
     }
 }

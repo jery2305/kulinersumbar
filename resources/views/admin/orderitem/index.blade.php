@@ -87,8 +87,19 @@
         </div>
     </div>
 
+    <!-- Grafik Dropdown -->
+    <div class="mb-3">
+        <label class="form-label">Tampilkan Grafik Berdasarkan</label>
+        <select id="grafikSelector" class="form-select w-auto">
+            <option value="tanggal">Per Tanggal</option>
+            <option value="bulan">Per Bulan</option>
+            <option value="tahun">Per Tahun</option>
+        </select>
+    </div>
+    <canvas id="grafikTransaksi" height="100"></canvas>
+
     <!-- ➕ Tambah Order Item -->
-    <a href="{{ route('admin.orderitem.form') }}" class="btn btn-primary mb-3">
+    <a href="{{ route('admin.orderitem.form') }}" class="btn btn-primary my-3">
         + Tambah Order Item
     </a>
 
@@ -132,4 +143,63 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const dataSets = {
+        tanggal: {
+            labels: {!! json_encode($perTanggal->pluck('label')) !!},
+            data: {!! json_encode($perTanggal->pluck('total')) !!},
+            label: 'Transaksi per Tanggal'
+        },
+        bulan: {
+            labels: {!! json_encode($perBulan->pluck('label')) !!},
+            data: {!! json_encode($perBulan->pluck('total')) !!},
+            label: 'Transaksi per Bulan'
+        },
+        tahun: {
+            labels: {!! json_encode($perTahun->pluck('label')) !!},
+            data: {!! json_encode($perTahun->pluck('total')) !!},
+            label: 'Transaksi per Tahun'
+        }
+    };
+
+    let chartInstance;
+    function renderChart(key) {
+        const ctx = document.getElementById('grafikTransaksi').getContext('2d');
+        if (chartInstance) chartInstance.destroy();
+
+        const selected = dataSets[key];
+        chartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: selected.labels,
+                datasets: [{
+                    label: selected.label,
+                    data: selected.data,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    tension: 0.3,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: { mode: 'index', intersect: false }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Periode' } },
+                    y: { beginAtZero: true, title: { display: true, text: 'Jumlah Transaksi' } }
+                }
+            }
+        });
+    }
+
+    renderChart('tanggal');
+    document.getElementById('grafikSelector').addEventListener('change', function () {
+        renderChart(this.value);
+    });
+</script>
 @endsection
