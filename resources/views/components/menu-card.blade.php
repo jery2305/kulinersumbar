@@ -10,7 +10,6 @@
             <input type="hidden" name="id" value="{{ $menu->id }}">
             <input type="hidden" name="name" value="{{ $menu->name }}">
             <input type="hidden" name="price" value="{{ $menu->price }}">
-            <input type="hidden" name="image" value="{{ $menu->image }}"> 
             <button type="submit"
                     class="block w-full text-center bg-red-600 text-white py-2 rounded hover:bg-red-700 transition">
                 Pesan

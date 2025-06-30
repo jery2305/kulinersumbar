@@ -25,7 +25,6 @@ class CartController extends Controller
             'id'       => $id,
             'name'     => $request->input('name'),
             'price'    => $request->input('price'),
-            'image'    => $request->input('image'),
             'quantity' => 1,
         ];
 
