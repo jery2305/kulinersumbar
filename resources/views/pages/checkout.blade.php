@@ -27,37 +27,44 @@
             @auth
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
-                    <input type="text" name="nama" value="{{ Auth::user()->name }}" readonly 
+                    <input type="text" name="nama" value="{{ Auth::user()->name }}" readonly
                         class="mt-1 block w-full border border-gray-300 rounded-lg p-2 bg-gray-100 cursor-not-allowed">
                 </div>
             @else
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
-                    <input type="text" name="nama" required 
+                    <input type="text" name="nama" required
                         class="mt-1 block w-full border border-gray-300 rounded-lg p-2">
                 </div>
             @endauth
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Alamat Pengiriman</label>
-                <textarea name="alamat" required 
+                <textarea name="alamat" required
                     class="mt-1 block w-full border border-gray-300 rounded-lg p-2"></textarea>
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Nomor Telepon</label>
-                <input type="text" name="telepon" required 
+                <input type="text" name="telepon" required
                     class="mt-1 block w-full border border-gray-300 rounded-lg p-2">
             </div>
 
             <div>
                 <label class="block text-sm font-medium text-gray-700">Metode Pembayaran</label>
-                <select name="pembayaran" required 
-                    class="mt-1 block w-full border border-gray-300 rounded-lg p-2">
+                <select name="pembayaran" id="metodePembayaran" required
+                    class="mt-1 block w-full border border-gray-300 rounded-lg p-2"
+                    onchange="tampilkanQRIS()">
                     <option value="Transfer Bank">Transfer Bank</option>
                     <option value="COD">Cash on Delivery (COD)</option>
                     <option value="E-Wallet">E-Wallet</option>
+                    <option value="QRIS">QRIS</option>
                 </select>
+            </div>
+
+            <div id="qrisContainer" class="mt-4 hidden text-center">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Scan QRIS di bawah ini:</label>
+                <img src="img/qris.jpg" alt="QRIS" class="w-48 my-4 mx-auto">
             </div>
 
             <div class="bg-gray-50 p-4 rounded-lg">
@@ -77,11 +84,25 @@
 
             <input type="hidden" name="total" value="{{ $total }}">
 
-            <button type="submit" 
+            <button type="submit"
                 class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
                 Konfirmasi Pesanan
             </button>
         </form>
     </div>
+
+    <!-- QRIS Script -->
+    <script>
+        function tampilkanQRIS() {
+            const select = document.getElementById('metodePembayaran');
+            const qrisDiv = document.getElementById('qrisContainer');
+            if (select.value === 'QRIS') {
+                qrisDiv.classList.remove('hidden');
+            } else {
+                qrisDiv.classList.add('hidden');
+            }
+        }
+    </script>
+
 </body>
 </html>
