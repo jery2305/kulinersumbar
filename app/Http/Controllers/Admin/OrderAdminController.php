@@ -19,25 +19,6 @@ class OrderAdminController extends Controller
         $order = $id ? Order::findOrFail($id) : null;
         return view('admin.order.create-edit', compact('order'));
     }
-public function uploadBukti(Request $request, $id)
-{
-    $request->validate([
-        'bukti' => 'required|image|mimes:jpeg,png,jpg|max:5120',
-    ]);
-
-    $order = Order::findOrFail($id);
-
-    if ($request->hasFile('bukti')) {
-        $file = $request->file('bukti');
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $file->move(public_path('img'), $filename);
-
-        $order->bukti_pembayaran = 'img/' . $filename;
-        $order->save();
-    }
-
-    return back()->with('success', 'Bukti pembayaran berhasil diunggah.');
-}
 
     public function store(Request $request)
     {

@@ -7,8 +7,6 @@
     <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <link href="{{ asset('build/assets/app.css') }}" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-
 </head>
 <body class="bg-gray-50 font-sans">
 
@@ -51,9 +49,8 @@
                 <input type="text" name="telepon" required 
                     class="mt-1 block w-full border border-gray-300 rounded-lg p-2">
             </div>
-            <div>
 
-  <div>
+            <div>
                 <label class="block text-sm font-medium text-gray-700">Metode Pembayaran</label>
                 <select name="pembayaran" required 
                     class="mt-1 block w-full border border-gray-300 rounded-lg p-2">
@@ -62,7 +59,6 @@
                     <option value="E-Wallet">E-Wallet</option>
                 </select>
             </div>
-
 
             <div class="bg-gray-50 p-4 rounded-lg">
                 <h3 class="text-lg font-semibold mb-2 text-gray-800">Ringkasan Pesanan</h3>
