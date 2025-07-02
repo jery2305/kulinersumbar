@@ -44,22 +44,15 @@
 
                 <!-- FORM UPDATE JUMLAH -->
                 <td class="py-3 px-6 text-center">
-                  <form action="{{ route('cart.update', $id) }}" method="POST" class="flex justify-center items-center space-x-2">
-                    @csrf
-                    @method('PUT')
-                    <input 
-                      type="number" 
-                      name="quantity" 
-                      value="{{ $item['quantity'] }}" 
-                      min="1"
-                      class="w-16 text-center border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                    >
-                    <button 
-                      type="submit" 
-                      class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
-                    >
-                      Ubah
-                    </button>
+                  <form action="{{ route('cart.update', $id) }}" method="POST" x-data @change="$el.submit()">
+                      @csrf
+                      @method('PUT')
+                      <input 
+                          type="number" 
+                          name="quantity" 
+                          value="{{ $item['quantity'] }}" 
+                          min="1"
+                          class="w-16 text-center border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-yellow-400">
                   </form>
                 </td>
 

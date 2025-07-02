@@ -72,6 +72,14 @@
                             <p class="text-right text-base font-bold text-gray-800 mt-3">
                                 Total: Rp {{ number_format($total, 0, ',', '.') }}
                             </p>
+                            
+                            @if($order->status === 'Dikirim')
+                                <div class="mt-3 p-3 border rounded bg-gray-50 text-sm text-gray-800">
+                                    <p class="font-medium">📍 Alamat Pengiriman:</p>
+                                    <p>{{ $order->alamat }}</p>
+                                </div>
+                            @endif
+
 
                             <!-- Tombol Aksi -->
                             <div class="mt-4 space-y-3">
