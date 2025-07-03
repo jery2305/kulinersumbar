@@ -91,7 +91,7 @@
     <div class="mb-3">
         <label class="form-label">Tampilkan Grafik Berdasarkan</label>
         <select id="grafikSelector" class="form-select w-auto">
-            <option value="tanggal">Per Tanggal</option>
+            <option value="tanggal">Per Hari</option>
             <option value="bulan">Per Bulan</option>
             <option value="tahun">Per Tahun</option>
         </select>

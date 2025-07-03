@@ -26,6 +26,8 @@ use App\Http\Controllers\Admin\RatingAdminController;
 
 
 
+
+
 //Route::get('/', function () {
 //    return view('welcome');
 // });
@@ -86,6 +88,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
     Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 });
+
+
+Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+
 
 // Checkout
 Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
@@ -160,6 +166,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('order/delete/{id}', [OrderAdminController::class, 'destroy'])->name('order.destroy');
     Route::post('order/confirm/{id}', [OrderAdminController::class, 'confirm'])->name('order.confirm');
     Route::post('order/upload-bukti/{id}', [OrderAdminController::class, 'uploadBukti'])->name('order.uploadBukti');
+});
+
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('/menu', [MenuAdminController::class, 'index'])->name('menu.index');
 });
 
 //OrderItem

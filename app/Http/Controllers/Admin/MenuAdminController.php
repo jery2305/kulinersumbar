@@ -9,24 +9,27 @@ use Illuminate\Support\Facades\File;
 
 class MenuAdminController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $menus = Menu::all();
+        $search = $request->input('search');
+
+        $menus = Menu::when($search, function ($query, $search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        })->get();
+
         return view('admin.menu.index', compact('menus'));
-    }
-
-    public function edit(Menu $menu)
-    {
-        // Kalau kamu perlu daftar gambar juga, bisa ambil disini
-        $imageFiles = $this->getAvailableImages(); 
-
-        return view('admin.menu.create-edit', compact('menu', 'imageFiles'));
     }
 
     public function create()
     {
         $imageFiles = $this->getAvailableImages();
         return view('admin.menu.create-edit', compact('imageFiles'));
+    }
+
+    public function edit(Menu $menu)
+    {
+        $imageFiles = $this->getAvailableImages();
+        return view('admin.menu.create-edit', compact('menu', 'imageFiles'));
     }
 
     public function store(Request $request)
@@ -41,8 +44,8 @@ class MenuAdminController extends Controller
         $filename = null;
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $filename = $image->getClientOriginalName();  // nama asli file
-            $image->move(public_path('img'), $filename); // simpan di public/img
+            $filename = $image->getClientOriginalName();
+            $image->move(public_path('img'), $filename);
         }
 
         Menu::create([
@@ -67,15 +70,13 @@ class MenuAdminController extends Controller
         $data = $request->only('name', 'price', 'description');
 
         if ($request->hasFile('image')) {
-            // Hapus file lama jika ada
             if ($menu->image && file_exists(public_path('img/' . $menu->image))) {
                 unlink(public_path('img/' . $menu->image));
             }
 
             $image = $request->file('image');
-            $filename = $image->getClientOriginalName(); // nama asli file
+            $filename = $image->getClientOriginalName();
             $image->move(public_path('img'), $filename);
-
             $data['image'] = $filename;
         }
 
@@ -86,17 +87,20 @@ class MenuAdminController extends Controller
 
     public function destroy(Menu $menu)
     {
+        if ($menu->image && file_exists(public_path('img/' . $menu->image))) {
+            unlink(public_path('img/' . $menu->image));
+        }
+
         $menu->delete();
+
         return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil dihapus.');
     }
 
     public function getAvailableImages()
     {
         $files = scandir(public_path('img'));
-        $images = array_filter($files, function ($file) {
+        return array_filter($files, function ($file) {
             return preg_match('/\.(jpg|jpeg|png)$/i', $file);
         });
-
-        return $images;
     }
 }

@@ -39,10 +39,11 @@
             <a href="{{ route('orders.history') }}" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">
                 Lihat Riwayat Pesanan
             </a>
-            <a href="{{ route('menu') }}" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
+            <a href="{{ route('menu.index') }}" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
                 Kembali ke Menu
             </a>
-        </div>
+     
+
     </div>
     
     <!-- Footer -->
