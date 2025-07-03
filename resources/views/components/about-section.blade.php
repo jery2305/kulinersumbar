@@ -11,8 +11,7 @@
     <div class="md:-ml-2 px-4 md:px-0">
       <h2 class="text-3xl font-bold text-gray-800 mb-4">Tentang Website Ini</h2>
       <p class="text-gray-700 mb-6 leading-relaxed">
-        Kuliner Sumbar adalah platform yang menyajikan informasi dan rekomendasi kuliner khas Minangkabau.
-        Temukan cita rasa autentik dari Sumatera Barat — dari makanan berat hingga minuman tradisional.
+        Website ini dibangun sebagai media promosi dan edukasi kuliner khas Minangkabau. Tak hanya menyajikan menu lezat, tapi juga memperkenalkan nilai budaya, sejarah, dan kekayaan rasa dari setiap hidangan Sumatera Barat.
       </p>
       <a href="/about" class="text-red-500 hover:underline font-semibold">
         Selengkapnya

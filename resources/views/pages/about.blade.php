@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- About Section -->
-<section class="max-w-4xl mx-auto p-8 rounded-lg shadow-lg mt-3">
+<section class="max-w-4xl mx-auto p-8 rounded-lg shadow-lg mt-3 bg-white">
   <!-- Gambar Kuliner -->
   <img src="{{ asset('img/about.jpg') }}"
      alt="Rendang Minang"
@@ -15,17 +15,26 @@
   </h1>
 
   <p class="text-black mb-4 text-lg leading-relaxed">
-    KulinerSumbar adalah website yang menghadirkan berbagai menu khas Minangkabau, mulai dari Rendang, Sate Padang, hingga Picaladang.
-    Kami berkomitmen untuk mengenalkan dan memudahkan Anda menikmati kelezatan kuliner asli Sumatera Barat.
+    <strong>KulinerSumbar</strong> adalah sebuah platform digital yang bertujuan untuk memperkenalkan dan mempromosikan kekayaan kuliner khas Minangkabau kepada masyarakat luas. Website ini menghadirkan berbagai macam hidangan tradisional dari Sumatera Barat yang telah melegenda, seperti <em>Rendang, Sate Padang, Dendeng Batokok, Itiak Lado Mudo</em>, hingga makanan ringan seperti <em>Karupuak Sanjai</em>.
   </p>
 
   <p class="text-black mb-4 text-lg leading-relaxed">
-    Website ini dikembangkan oleh mahasiswa Informatika sebagai media promosi dan edukasi budaya kuliner Indonesia, khususnya dari Sumatera Barat.
-    Kami berharap melalui platform ini, budaya kuliner Minang semakin dikenal dan dicintai di berbagai penjuru Nusantara.
+    Website ini dibangun sebagai bagian dari proyek <strong>Project-Based Learning</strong> oleh mahasiswa Program Studi Informatika. Kami ingin menggabungkan teknologi dengan budaya untuk menciptakan media informasi yang tidak hanya menarik secara visual, tetapi juga bermanfaat sebagai sarana edukasi bagi masyarakat, khususnya generasi muda, agar lebih mengenal budaya kuliner daerahnya sendiri.
+  </p>
+
+  <p class="text-black mb-4 text-lg leading-relaxed">
+    Selain menampilkan informasi mengenai berbagai makanan, KulinerSumbar juga dilengkapi fitur interaktif seperti penilaian menu, ulasan pengguna, dan bahkan simulasi pemesanan untuk mendekatkan pengalaman pengguna dengan dunia kuliner Minang. Kami percaya bahwa dengan pendekatan digital, promosi budaya dapat dilakukan secara lebih luas, efektif, dan menyenangkan.
+  </p>
+
+  <p class="text-black mb-4 text-lg leading-relaxed">
+    Harapan kami, KulinerSumbar tidak hanya menjadi katalog kuliner digital, tetapi juga menjadi jembatan antara tradisi dan teknologi, serta turut andil dalam pelestarian identitas kuliner lokal Indonesia di tengah arus globalisasi.
+  </p>
+
+  <p class="text-black mb-4 text-lg leading-relaxed">
+    Terima kasih telah mengunjungi website ini. Selamat menjelajahi cita rasa khas Minangkabau bersama KulinerSumbar!
   </p>
 </section>
 
 <!-- Tombol Kembali ke Home -->
 <x-back-home />
-
 @endsection

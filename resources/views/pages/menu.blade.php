@@ -20,24 +20,8 @@
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Daftar Menu</h2>
 
         <!-- Search Form -->
-        <form method="GET" action="{{ route('menu.index') }}" class="mb-6 max-w-md mx-auto">
-            <div class="flex items-center space-x-2">
-                <input
-                    type="text"
-                    name="search"
-                    value="{{ request('search') }}"
-                    placeholder="Cari menu..."
-                    class="flex-1 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
-                />
-                <button
-                    type="submit"
-                    class="bg-red-500 hover:bg-red-600 text-white px-4 py-3 rounded-md shadow"
-                >
-                    Cari
-                </button>
-            </div>
-        </form>
-
+        <x-search-form />
+        
         <!-- Menu Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @forelse($menus as $menu)
