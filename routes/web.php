@@ -25,9 +25,6 @@ use App\Http\Controllers\Admin\ContactAdminController;
 use App\Http\Controllers\Admin\RatingAdminController;
 
 
-
-
-
 //Route::get('/', function () {
 //    return view('welcome');
 // });
@@ -37,19 +34,12 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register']);
 
 //Login
-
-
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
-
 
 // Google OAuth routes
 Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback']);
-
-
-
-
 
 //Logout
 Route::post('/logout', function () {
@@ -73,6 +63,7 @@ Route::get('/about', [AboutController::class, 'index']);
 
 //Menu
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
+Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
 Route::post('/pesan', [MenuController::class, 'pesan'])->name('pesan');
 Route::post('/menu/{menuId}/review', [MenuController::class, 'addReview'])->name('menu.addReview');
 Route::get('/menu/{id}/review', [MenuController::class, 'reviewPage'])->name('menu.reviewPage');
@@ -88,10 +79,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
     Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 });
-
-
-Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
-
 
 // Checkout
 Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
@@ -129,15 +116,16 @@ Route::get('/pengiriman', function () {
 
 
 
-
-//AdminController
-
-//Admin
+// ------------------------
+// Admin Dashboard
+// ------------------------
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 });
 
-//User
+// ------------------------
+// User Management
+// ------------------------
 Route::middleware(['auth'])->prefix('admin/user')->name('admin.user.')->group(function () {
     Route::get('/', [UserAdminController::class, 'index'])->name('index');
     Route::get('/create', [UserAdminController::class, 'create'])->name('create');
@@ -147,7 +135,9 @@ Route::middleware(['auth'])->prefix('admin/user')->name('admin.user.')->group(fu
     Route::delete('/{user}', [UserAdminController::class, 'destroy'])->name('destroy');
 });
 
-//Menu
+// ------------------------
+// Menu Management
+// ------------------------
 Route::middleware(['auth'])->prefix('admin/menu')->name('admin.menu.')->group(function () {
     Route::get('/', [MenuAdminController::class, 'index'])->name('index');
     Route::get('/create', [MenuAdminController::class, 'create'])->name('create');
@@ -157,46 +147,51 @@ Route::middleware(['auth'])->prefix('admin/menu')->name('admin.menu.')->group(fu
     Route::delete('/{menu}', [MenuAdminController::class, 'destroy'])->name('destroy');
 });
 
-//Order
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('order', [OrderAdminController::class, 'index'])->name('order.index');
-    Route::get('order/form/{id?}', [OrderAdminController::class, 'form'])->name('order.form');
-    Route::post('order/store', [OrderAdminController::class, 'store'])->name('order.store');
-    Route::put('order/update/{id}', [OrderAdminController::class, 'update'])->name('order.update');
-    Route::delete('order/delete/{id}', [OrderAdminController::class, 'destroy'])->name('order.destroy');
-    Route::post('order/confirm/{id}', [OrderAdminController::class, 'confirm'])->name('order.confirm');
-    Route::post('order/upload-bukti/{id}', [OrderAdminController::class, 'uploadBukti'])->name('order.uploadBukti');
+// ------------------------
+// Order Management
+// ------------------------
+Route::middleware(['auth'])->prefix('admin/order')->name('admin.order.')->group(function () {
+    Route::get('/', [OrderAdminController::class, 'index'])->name('index');
+    Route::get('/form/{id?}', [OrderAdminController::class, 'form'])->name('form');
+    Route::post('/store', [OrderAdminController::class, 'store'])->name('store');
+    Route::put('/update/{id}', [OrderAdminController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [OrderAdminController::class, 'destroy'])->name('destroy');
+    Route::post('/confirm/{id}', [OrderAdminController::class, 'confirm'])->name('confirm');
+    Route::post('/upload-bukti/{id}', [OrderAdminController::class, 'uploadBukti'])->name('uploadBukti');
 });
 
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
-    Route::get('/menu', [MenuAdminController::class, 'index'])->name('menu.index');
+// ------------------------
+// Order Item Management
+// ------------------------
+Route::middleware(['auth'])->prefix('admin/orderitem')->name('admin.orderitem.')->group(function () {
+    Route::get('/', [OrderItemAdminController::class, 'index'])->name('index');
+    Route::get('/form/{id?}', [OrderItemAdminController::class, 'form'])->name('form');
+    Route::post('/', [OrderItemAdminController::class, 'store'])->name('store');
+    Route::put('/{id}', [OrderItemAdminController::class, 'update'])->name('update');
+    Route::delete('/{id}', [OrderItemAdminController::class, 'destroy'])->name('destroy');
 });
 
-//OrderItem
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('orderitem', [OrderItemAdminController::class, 'index'])->name('orderitem.index');
-    Route::get('orderitem/form/{id?}', [OrderItemAdminController::class, 'form'])->name('orderitem.form');
-    Route::post('orderitem', [OrderItemAdminController::class, 'store'])->name('orderitem.store');
-    Route::put('orderitem/{id}', [OrderItemAdminController::class, 'update'])->name('orderitem.update');
-    Route::delete('orderitem/{id}', [OrderItemAdminController::class, 'destroy'])->name('orderitem.destroy');
+// ------------------------
+// Contact Management
+// ------------------------
+Route::middleware(['auth'])->prefix('admin/contact')->name('admin.contact.')->group(function () {
+    Route::get('/', [ContactAdminController::class, 'index'])->name('index');
+    Route::get('/create', [ContactAdminController::class, 'create'])->name('create');
+    Route::post('/', [ContactAdminController::class, 'store'])->name('store');
+    Route::get('/{contact}/edit', [ContactAdminController::class, 'edit'])->name('edit');
+    Route::put('/{contact}', [ContactAdminController::class, 'update'])->name('update');
+    Route::delete('/{contact}', [ContactAdminController::class, 'destroy'])->name('destroy');
 });
 
-//Contact
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
-    Route::get('contact', [ContactAdminController::class, 'index'])->name('contact.index');
-    Route::get('contact/create', [ContactAdminController::class, 'create'])->name('contact.create');
-    Route::post('contact', [ContactAdminController::class, 'store'])->name('contact.store');
-    Route::get('contact/{contact}/edit', [ContactAdminController::class, 'edit'])->name('contact.edit');
-    Route::put('contact/{contact}', [ContactAdminController::class, 'update'])->name('contact.update');
-    Route::delete('contact/{contact}', [ContactAdminController::class, 'destroy'])->name('contact.destroy');
+// ------------------------
+// Rating Management
+// ------------------------
+Route::middleware(['auth'])->prefix('admin/rating')->name('admin.rating.')->group(function () {
+    Route::get('/', [RatingAdminController::class, 'index'])->name('index');
+    Route::get('/create', [RatingAdminController::class, 'create'])->name('create');
+    Route::post('/', [RatingAdminController::class, 'store'])->name('store');
+    Route::get('/{rating}/edit', [RatingAdminController::class, 'edit'])->name('edit');
+    Route::put('/{rating}', [RatingAdminController::class, 'update'])->name('update');
+    Route::delete('/{rating}', [RatingAdminController::class, 'destroy'])->name('destroy');
 });
 
-//Rating
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
-    Route::get('rating', [RatingAdminController::class, 'index'])->name('rating.index');
-    Route::get('rating/create', [RatingAdminController::class, 'create'])->name('rating.create');
-    Route::post('rating', [RatingAdminController::class, 'store'])->name('rating.store');
-    Route::get('rating/{rating}/edit', [RatingAdminController::class, 'edit'])->name('rating.edit');
-    Route::put('rating/{rating}', [RatingAdminController::class, 'update'])->name('rating.update');
-    Route::delete('rating/{rating}', [RatingAdminController::class, 'destroy'])->name('rating.destroy');
-});
