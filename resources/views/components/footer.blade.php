@@ -51,7 +51,7 @@
                     </svg>
                 </a>
                 <!-- Instagram -->
-                <a href="https://instagram.com" target="_blank" class="hover:text-white transition">
+                <a href="https://www.instagram.com/angelicajolie167?igsh=MWJud3M4anczY3QyeA==" target="_blank" class="hover:text-white transition">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2a3 3 0 013 3v10a3 3 0 01-3 3H7a3 3 0 01-3-3V7a3 3 0 013-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.5-1.5a1.5 1.5 0 11-3.001-.001A1.5 1.5 0 0116.5 5.5z"/>
                     </svg>

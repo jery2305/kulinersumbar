@@ -173,16 +173,15 @@
 
         const selected = dataSets[key];
         chartInstance = new Chart(ctx, {
-            type: 'line',
+            type: 'bar', // Ubah dari 'line' menjadi 'bar'
             data: {
                 labels: selected.labels,
                 datasets: [{
                     label: selected.label,
                     data: selected.data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
                     borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    tension: 0.3,
-                    fill: true
+                    borderWidth: 1
                 }]
             },
             options: {
@@ -204,4 +203,5 @@
         renderChart(this.value);
     });
 </script>
+
 @endsection
