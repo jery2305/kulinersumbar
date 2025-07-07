@@ -9,8 +9,6 @@
         </a>
     </div>
 
-    <a href="{{ route('admin.user.create') }}" class="btn btn-primary mb-3">+ Tambah Pengguna</a>
-
     <div class="table-responsive shadow rounded">
         <table class="table table-bordered table-hover align-middle">
             <thead class="table-light">
@@ -32,7 +30,6 @@
                     <td>••••••••</td> {{-- Demi keamanan, jangan tampilkan password asli --}}
                     <td>{{ $user->role }}</td>
                     <td>
-                        <a href="{{ route('admin.user.edit', $user) }}" class="btn btn-warning btn-sm me-1">Edit</a>
                         <form action="{{ route('admin.user.destroy', $user) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus pengguna ini?')">
                             @csrf
                             @method('DELETE')

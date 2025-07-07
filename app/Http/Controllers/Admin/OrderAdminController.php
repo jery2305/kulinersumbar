@@ -20,32 +20,6 @@ class OrderAdminController extends Controller
         return view('admin.order.create-edit', compact('order'));
     }
 
-    public function store(Request $request)
-    {
-        $data = $request->validate([
-            'user_id' => 'required|integer',
-            'nama' => 'required|string|max:255',
-            'alamat' => 'required|string',
-            'telepon' => 'required|string|max:20',
-            'pembayaran' => 'required|string',
-            'status' => 'required|string',
-            'resi' => 'nullable|string',
-            'total' => 'required|numeric',
-            'bukti_pembayaran' => 'nullable|image|max:2048', // max 2MB
-        ]);
-
-    if ($request->hasFile('bukti_pembayaran')) {
-            $file = $request->file('bukti_pembayaran');
-            $filename = time().'_'.$file->getClientOriginalName();
-            $file->storeAs('public/bukti_pembayaran', $filename);
-            $validated['bukti_pembayaran'] = $filename;
-        }
-
-        Order::create($validated);
-
-        return redirect()->route('admin.order.index')->with('success', 'Order berhasil ditambahkan.');
-    }
-
    public function update(Request $request, Order $order)
     {
         $validated = $request->validate([
@@ -75,14 +49,6 @@ class OrderAdminController extends Controller
         $order->update($validated);
 
         return redirect()->route('admin.order.index')->with('success', 'Order berhasil diperbarui.');
-    }
-
-    public function destroy($id)
-    {
-        $order = Order::findOrFail($id);
-        $order->delete();
-
-        return redirect()->route('admin.order.index')->with('success', 'Order berhasil dihapus.');
     }
 
    public function confirm(Request $request, $id)

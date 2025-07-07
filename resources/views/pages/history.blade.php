@@ -41,7 +41,7 @@
                                 @php
                                     $statusBadge = match($order->status) {
                                     'Menunggu Pembayaran' => ['label' => '⏳ Menunggu Pembayaran', 'color' => 'text-yellow-700 bg-yellow-100'],
-                                    'Diproses' => ['label' => '🔧 Diproses', 'color' => 'text-blue-700 bg-blue-100'],
+                                    'Diproses' => ['label' => '🧑‍🍳 Diproses', 'color' => 'text-blue-700 bg-blue-100'],
                                     'Dikirim' => ['label' => '🚚 Dikirim', 'color' => 'text-purple-700 bg-purple-100'],
                                     'Selesai' => ['label' => '✅ Selesai', 'color' => 'text-green-700 bg-green-100'],
                                     'Dibatalkan' => ['label' => '❌ Dibatalkan', 'color' => 'text-gray-600 bg-gray-200'],

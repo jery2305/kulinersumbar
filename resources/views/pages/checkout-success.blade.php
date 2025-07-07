@@ -37,7 +37,7 @@
 
         <div class="flex justify-center space-x-4 mt-4">
             <a href="{{ route('orders.history') }}" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">
-                Lihat Riwayat Pesanan
+                Kelola Pesanan Saya
             </a>
             <a href="{{ route('menu.index') }}" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
                 Kembali ke Menu

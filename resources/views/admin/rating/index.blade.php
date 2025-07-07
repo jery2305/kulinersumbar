@@ -9,8 +9,6 @@
         </a>
     </div>
 
-    <a href="{{ route('admin.rating.create') }}" class="btn btn-primary mb-3">+ Tambah Rating</a>
-
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -34,7 +32,6 @@
                     <td>{{ $rating->review }}</td>
                     <td>{{ $rating->menu->name ?? '-' }}</td>
                     <td>
-                        <a href="{{ route('admin.rating.edit', $rating) }}" class="btn btn-warning btn-sm me-1">Edit</a>
                         <form action="{{ route('admin.rating.destroy', $rating) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus rating ini?')">
                             @csrf
                             @method('DELETE')

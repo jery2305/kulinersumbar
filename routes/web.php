@@ -128,10 +128,6 @@ Route::middleware(['auth'])->group(function () {
 // ------------------------
 Route::middleware(['auth'])->prefix('admin/user')->name('admin.user.')->group(function () {
     Route::get('/', [UserAdminController::class, 'index'])->name('index');
-    Route::get('/create', [UserAdminController::class, 'create'])->name('create');
-    Route::post('/', [UserAdminController::class, 'store'])->name('store');
-    Route::get('/{user}/edit', [UserAdminController::class, 'edit'])->name('edit');
-    Route::put('/{user}', [UserAdminController::class, 'update'])->name('update');
     Route::delete('/{user}', [UserAdminController::class, 'destroy'])->name('destroy');
 });
 
@@ -152,10 +148,8 @@ Route::middleware(['auth'])->prefix('admin/menu')->name('admin.menu.')->group(fu
 // ------------------------
 Route::middleware(['auth'])->prefix('admin/order')->name('admin.order.')->group(function () {
     Route::get('/', [OrderAdminController::class, 'index'])->name('index');
-    Route::get('/form/{id?}', [OrderAdminController::class, 'form'])->name('form');
-    Route::post('/store', [OrderAdminController::class, 'store'])->name('store');
+    Route::get('/form/{id}', [OrderAdminController::class, 'form'])->name('form');
     Route::put('/update/{id}', [OrderAdminController::class, 'update'])->name('update');
-    Route::delete('/delete/{id}', [OrderAdminController::class, 'destroy'])->name('destroy');
     Route::post('/confirm/{id}', [OrderAdminController::class, 'confirm'])->name('confirm');
     Route::post('/upload-bukti/{id}', [OrderAdminController::class, 'uploadBukti'])->name('uploadBukti');
 });
@@ -176,10 +170,6 @@ Route::middleware(['auth'])->prefix('admin/orderitem')->name('admin.orderitem.')
 // ------------------------
 Route::middleware(['auth'])->prefix('admin/contact')->name('admin.contact.')->group(function () {
     Route::get('/', [ContactAdminController::class, 'index'])->name('index');
-    Route::get('/create', [ContactAdminController::class, 'create'])->name('create');
-    Route::post('/', [ContactAdminController::class, 'store'])->name('store');
-    Route::get('/{contact}/edit', [ContactAdminController::class, 'edit'])->name('edit');
-    Route::put('/{contact}', [ContactAdminController::class, 'update'])->name('update');
     Route::delete('/{contact}', [ContactAdminController::class, 'destroy'])->name('destroy');
 });
 
@@ -188,10 +178,6 @@ Route::middleware(['auth'])->prefix('admin/contact')->name('admin.contact.')->gr
 // ------------------------
 Route::middleware(['auth'])->prefix('admin/rating')->name('admin.rating.')->group(function () {
     Route::get('/', [RatingAdminController::class, 'index'])->name('index');
-    Route::get('/create', [RatingAdminController::class, 'create'])->name('create');
-    Route::post('/', [RatingAdminController::class, 'store'])->name('store');
-    Route::get('/{rating}/edit', [RatingAdminController::class, 'edit'])->name('edit');
-    Route::put('/{rating}', [RatingAdminController::class, 'update'])->name('update');
     Route::delete('/{rating}', [RatingAdminController::class, 'destroy'])->name('destroy');
 });
 

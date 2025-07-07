@@ -33,7 +33,6 @@
                     <td>{{ $contact->email }}</td>
                     <td>{{ Str::limit($contact->pesan, 50) }}</td>
                     <td>
-                        <a href="{{ route('admin.contact.edit', $contact) }}" class="btn btn-sm btn-warning me-1">Edit</a>
                         <form action="{{ route('admin.contact.destroy', $contact) }}" method="POST" class="d-inline">
                             @csrf 
                             @method('DELETE')

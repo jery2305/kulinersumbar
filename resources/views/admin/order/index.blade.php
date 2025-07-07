@@ -16,8 +16,6 @@
         </div>
     @endif
 
-    <a href="{{ route('admin.order.form') }}" class="btn btn-success mb-3">Tambah Order Baru</a>
-
     <table class="table table-striped table-bordered align-middle">
         <thead class="table-dark text-center">
             <tr>
@@ -98,12 +96,6 @@
                                 </select>
                             </form>
                         @endif
-
-                        <form action="{{ route('admin.order.destroy', $order->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin hapus order ini?')">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-sm btn-danger" type="submit">Hapus</button>
-                        </form>
                     </td>
                 </tr>
             @empty
