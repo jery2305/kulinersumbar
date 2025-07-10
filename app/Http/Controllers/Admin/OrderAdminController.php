@@ -20,35 +20,27 @@ class OrderAdminController extends Controller
         return view('admin.order.create-edit', compact('order'));
     }
 
-   public function update(Request $request, Order $order)
+    public function update(Request $request, Order $order)
     {
+        // Cek status order, hanya izinkan jika "menunggu pembayaran" atau "diproses"
+        if (!in_array(strtolower($order->status), ['menunggu pembayaran', 'diproses'])) {
+            return redirect()->route('admin.order.index')->with('error', 'Alamat dan Telepon hanya bisa diedit saat status Menunggu Pembayaran atau Diproses.');
+        }
+        
         $validated = $request->validate([
-            'user_id' => 'required|integer',
-            'nama' => 'required|string',
-            'alamat' => 'required|string',
-            'telepon' => 'required|string',
-            'pembayaran' => 'required|string',
-            'status' => 'required|string',
-            'resi' => 'nullable|string',
-            'total' => 'required|numeric|min:0',
-            'bukti_pembayaran' => 'nullable|image|max:2048',
+            'alamat' => 'required|string|max:255',
+            'telepon' => 'required|string|max:20',
         ]);
 
-        if ($request->hasFile('bukti_pembayaran')) {
-            // Hapus file lama jika ada
-            if ($order->bukti_pembayaran && \Storage::exists('public/bukti_pembayaran/' . $order->bukti_pembayaran)) {
-                \Storage::delete('public/bukti_pembayaran/' . $order->bukti_pembayaran);
-            }
+        // Debug dulu kalau perlu
+        // dd($validated);
 
-            $file = $request->file('bukti_pembayaran');
-            $filename = time().'_'.$file->getClientOriginalName();
-            $file->storeAs('public/bukti_pembayaran', $filename);
-            $validated['bukti_pembayaran'] = $filename;
-        }
+        // Simpan manual
+        $order->alamat = $validated['alamat'];
+        $order->telepon = $validated['telepon'];
+        $order->save();
 
-        $order->update($validated);
-
-        return redirect()->route('admin.order.index')->with('success', 'Order berhasil diperbarui.');
+        return redirect()->route('admin.order.index')->with('success', 'Alamat dan Telepon berhasil diperbarui.');
     }
 
    public function confirm(Request $request, $id)

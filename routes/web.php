@@ -120,7 +120,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin/order')->name('admin.order.')->group(function () {
         Route::get('/', [OrderAdminController::class, 'index'])->name('index');
         Route::get('/form/{id}', [OrderAdminController::class, 'form'])->name('form');
-        Route::put('/update/{id}', [OrderAdminController::class, 'update'])->name('update');
+        Route::put('/update/{order}', [OrderAdminController::class, 'update'])->name('update');
         Route::post('/confirm/{id}', [OrderAdminController::class, 'confirm'])->name('confirm');
         Route::post('/upload-bukti/{id}', [OrderAdminController::class, 'uploadBukti'])->name('uploadBukti');
     });
