@@ -45,10 +45,6 @@ class MenuController extends Controller
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
             'review' => 'required|string|min:4',
-        ], [
-            'rating.required' => 'Rating wajib diisi.',
-            'review.required' => 'Ulasan tidak boleh kosong.',
-            'review.min' => 'Ulasan minimal 4 karakter.',
         ]);
 
         $hasOrdered = \App\Models\OrderItem::where('menu_id', $menuId)
@@ -75,7 +71,10 @@ class MenuController extends Controller
 
     public function reviewPage($id)
     {
-        $menu = Menu::with(['ratings.user'])->findOrFail($id);
+        // HANYA ambil rating >= 3
+        $menu = Menu::with(['ratings' => function ($query) {
+            $query->where('rating', '>=', 3)->with('user');
+        }])->findOrFail($id);
 
         $canReview = false;
 

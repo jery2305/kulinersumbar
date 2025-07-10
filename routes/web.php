@@ -161,7 +161,6 @@ Route::middleware(['auth'])->prefix('admin/orderitem')->name('admin.orderitem.')
     Route::get('/', [OrderItemAdminController::class, 'index'])->name('index');
     Route::get('/form/{id?}', [OrderItemAdminController::class, 'form'])->name('form');
     Route::post('/', [OrderItemAdminController::class, 'store'])->name('store');
-    Route::put('/{id}', [OrderItemAdminController::class, 'update'])->name('update');
     Route::delete('/{id}', [OrderItemAdminController::class, 'destroy'])->name('destroy');
 });
 

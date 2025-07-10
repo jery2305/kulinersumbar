@@ -100,9 +100,9 @@
 
 
     <!-- ➕ Tambah Order Item -->
-    <a href="{{ route('admin.orderitem.form') }}" class="btn btn-primary my-3">
+    <!-- <a href="{{ route('admin.orderitem.form') }}" class="btn btn-primary my-3">
     + Tambah Order Item
-    </a>
+    </a> -->
 
     <!-- 📋 Tabel Order Item -->
     <div class="table-responsive shadow-sm border rounded">
@@ -126,7 +126,6 @@
                     <td>{{ $item->quantity }}</td>
                     <td>Rp{{ number_format($item->price * $item->quantity, 0, ',', '.') }}</td>
                     <td>
-                        <a href="{{ route('admin.orderitem.form', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
                         <form action="{{ route('admin.orderitem.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus item ini?')">
                             @csrf
                             @method('DELETE')
