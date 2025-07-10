@@ -4,14 +4,22 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Rating;
-use App\Models\Menu;
 use Illuminate\Http\Request;
 
 class RatingAdminController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $ratings = Rating::orderBy('rating', 'desc')->get();
+        $query = Rating::with('menu');
+
+        if ($request->has('search') && $request->search) {
+            $query->whereHas('menu', function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        $ratings = $query->orderBy('rating', 'desc')->get();
+
         return view('admin.rating.index', compact('ratings'));
     }
 

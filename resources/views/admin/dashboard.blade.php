@@ -24,7 +24,7 @@
                 ],
                 [
                     'color' => 'linear-gradient(135deg, #f093fb, #f5576c)',
-                    'title' => 'Daftar Order Item',
+                    'title' => 'Daftar Rekapan Penjualan',
                     'count' => $orderItemCount,
                     'icon' => 'bi-box-seam',
                     'route' => route('admin.orderitem.index')

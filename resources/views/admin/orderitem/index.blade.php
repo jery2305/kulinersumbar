@@ -4,7 +4,7 @@
 <div class="container">
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="fw-bold">Daftar Order Item</h1>
+        <h1 class="fw-bold">Daftar Rekapan Penjualan</h1>
         <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-left-circle"></i> Dashboard
         </a>
