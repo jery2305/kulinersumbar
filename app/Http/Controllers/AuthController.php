@@ -22,6 +22,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
+        // Validasi input login
         $request->validate([
             'email'    => 'required|email',
             'password' => 'required',
@@ -29,20 +30,22 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
 
+        // Coba autentikasi
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+
             $user = Auth::user();
 
-            if ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard');
-            }
-
-            return redirect()->route('home');
+            // Redirect sesuai role
+            return $user->role === 'admin'
+                ? redirect()->route('admin.dashboard')
+                : redirect()->route('home');
         }
 
+        // Jika gagal login
         return back()->withErrors([
             'email' => 'Email atau password salah.',
-        ]);
+        ])->withInput();
     }
 
     /**
@@ -51,13 +54,15 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect('/');
     }
 
     /**
-     * Redirect ke Google
+     * Redirect ke Google untuk login
      */
     public function redirectToGoogle()
     {
@@ -72,23 +77,26 @@ class AuthController extends Controller
         try {
             $googleUser = Socialite::driver('google')->stateless()->user();
 
+            // Cari atau buat user baru
             $user = User::firstOrCreate(
                 ['email' => $googleUser->getEmail()],
                 [
-                    'name' => $googleUser->getName(),
-                    'password' => bcrypt(str()->random(16)), // random default password
+                    'name'     => $googleUser->getName(),
+                    'password' => bcrypt(str()->random(16)), // password random
+                    'role'     => 'user', // default role
                 ]
             );
 
             Auth::login($user);
 
-            if ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard');
-            }
-
-            return redirect()->intended('/');
+            // Redirect sesuai role
+            return $user->role === 'admin'
+                ? redirect()->route('admin.dashboard')
+                : redirect()->intended('/');
         } catch (\Exception $e) {
-            return redirect('/login')->withErrors(['google_error' => 'Login Google gagal.']);
+            return redirect('/login')->withErrors([
+                'google_error' => 'Login Google gagal. Silakan coba lagi.'
+            ]);
         }
     }
 }

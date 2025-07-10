@@ -52,17 +52,7 @@
       </div>
 
       <!-- Role -->
-      <div>
-        <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Daftar Sebagai</label>
-        <select id="role" name="role"
-                class="w-full p-3 text-sm border rounded-xl focus:ring-blue-500 focus:border-blue-500 bg-gray-50 @error('role') border-red-500 @enderror" required>
-          <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
-          <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-        </select>
-        @error('role')
-          <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
-        @enderror
-      </div>
+      <input type="hidden" name="role" value="user">
 
       <!-- Password -->
       <div>
