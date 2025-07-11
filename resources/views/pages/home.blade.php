@@ -50,7 +50,8 @@
     <!-- About-Section -->
     <x-about-section />
 
-    
+    <!-- galeri -->
+     <x-galeri />
     <!-- Footer -->
     <x-footer />
 
