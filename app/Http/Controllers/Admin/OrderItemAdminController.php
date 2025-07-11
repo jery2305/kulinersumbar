@@ -7,13 +7,13 @@ use App\Models\OrderItem;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
 
 class OrderItemAdminController extends Controller
 {
     public function index(Request $request)
     {
-        $query = OrderItem::with(['order', 'menu']);
+        $query = OrderItem::with(['order', 'menu'])
+            ->orderBy('created_at', 'desc'); // Menampilkan data terbaru terlebih dahulu
 
         // Filter input dari form
         if ($request->filled('tanggal')) {
@@ -29,22 +29,31 @@ class OrderItemAdminController extends Controller
         $allItems = $query->get();
         $orderItems = $query->paginate(10);
 
-        // Sinkronisasi grafik (pastikan pluck bisa bekerja)
+        // Sinkronisasi grafik
         $perTanggal = collect(
             $allItems->groupBy(fn($item) => Carbon::parse($item->created_at)->format('Y-m-d'))
-                ->map(fn($group, $key) => (object)['label' => $key, 'total' => $group->sum('quantity')])
+                ->map(fn($group, $key) => (object)[
+                    'label' => $key,
+                    'total' => $group->sum('quantity')
+                ])
                 ->values()
         );
 
         $perBulan = collect(
             $allItems->groupBy(fn($item) => Carbon::parse($item->created_at)->format('F Y'))
-                ->map(fn($group, $key) => (object)['label' => $key, 'total' => $group->sum('quantity')])
+                ->map(fn($group, $key) => (object)[
+                    'label' => $key,
+                    'total' => $group->sum('quantity')
+                ])
                 ->values()
         );
 
         $perTahun = collect(
             $allItems->groupBy(fn($item) => Carbon::parse($item->created_at)->format('Y'))
-                ->map(fn($group, $key) => (object)['label' => $key, 'total' => $group->sum('quantity')])
+                ->map(fn($group, $key) => (object)[
+                    'label' => $key,
+                    'total' => $group->sum('quantity')
+                ])
                 ->values()
         );
 
