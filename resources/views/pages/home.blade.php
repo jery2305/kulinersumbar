@@ -44,14 +44,12 @@
     <!-- Rekomendasi Kuliner -->
     <x-menu-recommended :recommendedMenus="$recommendedMenus" />
     
-    <!-- Menu Price -->
-    
-
     <!-- About-Section -->
     <x-about-section />
 
     <!-- galeri -->
      <x-galeri />
+
     <!-- Footer -->
     <x-footer />
 
