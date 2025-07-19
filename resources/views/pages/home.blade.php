@@ -51,7 +51,7 @@
      <x-galeri />
 
     <!-- Footer -->
-    <x-footer />
+    <x-footer /> 
 
     <!-- Floating WhatsApp Button -->
     <x-wa-button />

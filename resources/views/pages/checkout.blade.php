@@ -49,23 +49,100 @@
                 <input type="text" name="telepon" required
                     class="mt-1 block w-full border border-gray-300 rounded-lg p-2">
             </div>
+<div>
+    <label for="metodePembayaran" class="block text-sm font-medium text-gray-700">Metode Pembayaran</label>
+    <select name="pembayaran" id="metodePembayaran" required 
+        class="mt-1 block w-full border border-gray-300 rounded-lg p-2"
+        onchange="tampilkanMetode()">
+        <option value="">-- Pilih Metode Pembayaran --</option>
+        <option value="BANK_MANDIRI">Transfer Bank - Mandiri</option>
+        <option value="BANK_BCA">Transfer Bank - BCA</option>
+        <option value="BANK_BRI">Transfer Bank - BRI</option>
+        <option value="BANK_BNI">Transfer Bank - BNI</option>
+        <option value="BANK_BTN">Transfer Bank - BTN</option>
+        <option value="BANK_CIMB">Transfer Bank - CIMB Niaga</option>
+        <option value="BANK_DANAMON">Transfer Bank - Danamon</option>
+        <option value="COD">Cash on Delivery (COD)</option>
+        <option value="E_WALLET">E-Wallet</option>
+        <option value="QRIS">QRIS</option>
+    </select>
+</div>
 
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Metode Pembayaran</label>
-                <select name="pembayaran" id="metodePembayaran" required
-                    class="mt-1 block w-full border border-gray-300 rounded-lg p-2"
-                    onchange="tampilkanQRIS()">
-                    <option value="Transfer Bank">Transfer Bank</option>
-                    <option value="COD">Cash on Delivery (COD)</option>
-                    <option value="E-Wallet">E-Wallet</option>
-                    <option value="QRIS">QRIS</option>
-                </select>
-            </div>
+<!-- Info Bank -->
+<div id="bankInfo" class="mt-4 hidden bg-gray-50 p-4 rounded-lg border text-sm">
+    <p><strong>No. Rekening:</strong> <span id="noRekening"></span></p>
+    <p><strong>Atas Nama:</strong> <span id="atasNama"></span></p>
+</div>
 
-            <div id="qrisContainer" class="mt-4 hidden text-center">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Scan QRIS di bawah ini:</label>
-                <img src="img/qris.jpg" alt="QRIS" class="w-48 my-4 mx-auto">
-            </div>
+<!-- QRIS -->
+<div id="qrisContainer" class="mt-4 hidden text-center">
+    <label class="block text-sm font-medium text-gray-700 mb-2">Scan QRIS di bawah ini:</label>
+    <img src="img/qris.jpg" alt="QRIS" class="w-48 my-4 mx-auto">
+</div>
+
+<script>
+    function tampilkanMetode() {
+        const metode = document.getElementById("metodePembayaran").value;
+        const qrisContainer = document.getElementById("qrisContainer");
+        const bankInfo = document.getElementById("bankInfo");
+
+        // Default sembunyikan semua
+        qrisContainer.classList.add("hidden");
+        bankInfo.classList.add("hidden");
+
+        // Data rekening bank
+        const rekening = {
+            BANK_MANDIRI: {
+               
+                nomor: "123000000001",
+                atasNama: "KulinerSumbar"
+            },
+            BANK_BCA: {
+               
+                nomor: "123000000002",
+                atasNama: "KulinerSumbar"
+            },
+            BANK_BRI: {
+             
+                nomor: "123000000003",
+                atasNama: "KulinerSumbar"
+            },
+            BANK_BNI: {
+              
+                nomor: "123000000004",
+                atasNama: "KulinerSumbar"
+            },
+            BANK_BTN: {
+               
+                nomor: "123000000005",
+                atasNama: "KulinerSumbar"
+            },
+            BANK_CIMB: {
+               
+                nomor: "123000000006",
+                atasNama: "KulinerSumbar"
+            },
+            BANK_DANAMON: {
+               
+                nomor: "123000000007",
+                atasNama: "KulinerSumbar"
+            }
+        };
+
+        // Tampilkan QRIS
+        if (metode === "QRIS") {
+            qrisContainer.classList.remove("hidden");
+        }
+
+        // Tampilkan info rekening bank jika metode transfer bank
+        if (rekening[metode]) {
+             document.getElementById("noRekening").innerText = rekening[metode].nomor;
+            document.getElementById("atasNama").innerText = rekening[metode].atasNama;
+            bankInfo.classList.remove("hidden");
+        }
+    }
+</script>
+
 
             <div class="bg-gray-50 p-4 rounded-lg">
                 <h3 class="text-lg font-semibold mb-2 text-gray-800">Ringkasan Pesanan</h3>
