@@ -10,6 +10,6 @@ class Menu extends Model
 
     public function ratings()
     {
-        return $this->hasMany(Rating::class);
+        return $this->hasMany(Rating::class)->orderBy('created_at', 'desc');
     }
 }

@@ -47,7 +47,7 @@
                     </h2>
                     <div id="faq-2-body" class="hidden" aria-labelledby="faq-2">
                         <div class="py-4 text-gray-600">
-                            Buka halaman <a href="{{ route('menu') }}" class="text-red-600 underline">Menu</a>, pilih makanan, klik "Pesan", lalu lanjut ke checkout.
+                            Buka halaman <a href="{{ route('menu.index') }}" class="text-red-600 underline">Menu</a>, pilih makanan, klik "Pesan", lalu lanjut ke checkout.
                         </div>
                     </div>
                 </div>
