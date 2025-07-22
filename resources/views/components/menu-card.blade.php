@@ -26,7 +26,7 @@
 
             <button type="submit"
                     class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-xl transition duration-300">
-                Pesan Sekarang
+                Pesan
             </button>
         </form>
 
