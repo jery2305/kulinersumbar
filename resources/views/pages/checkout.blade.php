@@ -63,7 +63,6 @@
         <option value="BANK_CIMB">Transfer Bank - CIMB Niaga</option>
         <option value="BANK_DANAMON">Transfer Bank - Danamon</option>
         <option value="COD">Cash on Delivery (COD)</option>
-        <option value="E_WALLET">E-Wallet</option>
         <option value="QRIS">QRIS</option>
     </select>
 </div>
